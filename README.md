@@ -1,8 +1,8 @@
 <h1 align="center">Watchlistr</h1>
 
-![Watchlistr Login Page](/src/styles/Screenshots/LoginPage.png)
-![Watchlistr Popular Movies](/src/styles/Screenshots/PopularMovies.png)
-![Watchlistr Top Rated TV Shows](/src/styles/Screenshots/TopRatedTVShows.png)
+![Watchlistr Login Page](/React/src/styles/Screenshots/Screenshots/LoginPage.png)
+![Watchlistr Popular Movies](/React/src/styles/Screenshots/Screenshots/PopularMovies.png)
+![Watchlistr Top Rated TV Shows](/React/src/styles/Screenshots/Screenshots/TopRatedTVShows.png)
 
 Watchlistr is a web application that allows users to search for and discover popular and top-rated movies and TV shows, as well as TV shows airing today (updates periodically). Users can also save movies and TV shows to their own watchlist!
 

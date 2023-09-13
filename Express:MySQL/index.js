@@ -23,17 +23,6 @@ app.use(cors())
 app.use(express.urlencoded({ extended: true }));
 app.use(session(sessionOptions));
 
-/*
-const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    port: 3306,
-    password: '',
-    database: 'watch',
-    connectionLimit: 10,
-})
-*/
-
 const pool = mysql.createPool({
   host: 'sql.freedb.tech',
   user: 'freedb_watchlistr_dev',
@@ -52,7 +41,7 @@ const pool = mysql.createPool({
 const executeQuery = async (query, params) => {
   const db = await pool.getConnection();
   try {
-    const [results, fields] = await db.query(query, [...params]); // Use 'params' directly
+    const [results, fields] = await db.query(query, [...params]);
     return results;
   }
   catch (error) {
@@ -115,8 +104,7 @@ app.post('/login', async (req, res) => {
       throw new Error('Invalid Password');
     }
     req.session.userId = user.id;
-    const token = jwt.sign({ userId: user.id }, secretKey); // Use 'secretKey'
-    // Send the user's information and token in the response
+    const token = jwt.sign({ userId: user.id }, secretKey);
     res.send({
       message: 'Login Successful',
       userId: user.id,

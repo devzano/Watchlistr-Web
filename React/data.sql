@@ -1,0 +1,35 @@
+DROP DATABASE IF EXISTS watchlistr_db;
+CREATE DATABASE watchlistr_db;
+\c watchlistr_db;
+
+CREATE TABLE users (
+id SERIAL PRIMARY KEY,
+username VARCHAR(30) NOT NULL UNIQUE,
+password VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE user_watchlist_movie (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    movieID INT NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    releaseDate VARCHAR(200),
+    runtime INT,
+    posterPath VARCHAR(255),
+    overview TEXT,
+    username VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE user_watchlist_tv (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    tvShowID INT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    airDates VARCHAR(200),
+    runtime INT,
+    posterPath VARCHAR(255),
+    overview TEXT,
+    username VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);

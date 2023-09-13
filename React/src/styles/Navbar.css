@@ -1,0 +1,224 @@
+/* Common styles for all screen sizes */
+.nav-container {
+  padding-top: 100px;
+}
+/* Navbar styles */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.40);
+  border-radius: 10px;
+  height: 40px;
+  padding: 10px;
+  margin: 0 auto;
+  width: 85%;
+}
+
+.navbar a:hover {
+  color: goldenrod;
+}
+
+.navbar a.active {
+  color: tomato;
+}
+
+button {
+  background-color: slategray;
+  border-radius: 8px;
+  margin: 5px;
+  font-family: 'Nova Flat';
+  font-size: 25px;
+  cursor: pointer;
+  color: whitesmoke;
+}
+
+/* Navbar links */
+.navbar a {
+  margin: 10px;
+  color: whitesmoke;
+  text-decoration: none;
+  font-size: 16px;
+}
+/* Dropdown styles */
+.dropdown {
+  position: relative;
+}
+
+.dropbtn {
+  background-color: transparent;
+  border: none;
+  color: whitesmoke;
+  font-size: 1.5em;
+  text-decoration: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+/* Dropdown content */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.8);
+  min-width: 120px;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 1);
+  padding: 0.5rem;
+}
+/* Dropdown content links */
+.dropdown-content button {
+  background-color: transparent;
+  border: none;
+  display: block;
+  margin: 0.3rem 0;
+  font-size: 1.1em;
+  cursor: pointer;
+  color: crimson;
+}
+/* Mobile */
+@media (max-width: 767px) {
+  .logo {
+    width: 50px;
+    height: auto;
+  }
+  /* Show the menu icon, welcome text and username inline */
+  .header-container {
+    display: flex;
+    align-items: center;
+  }
+  /* Show the navbar links in a menu icon when in mobile view */
+  .navbar-links {
+    display: none;
+  }
+  /* Show the menu icon */
+  .menu-icon {
+    display: block;
+    margin: 5px;
+    font-size: 22px;
+    cursor: pointer;
+  }
+  /* Show the navbar links when the menu is open */
+  .show-menu .navbar-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+  }
+  /* Add some spacing between the mobile links */
+  .show-menu .navbar-links a {
+    margin: 5px 0;
+  }
+  /* Navbar styles for mobile */
+  .navbar {
+    flex-direction: column;
+    height: auto;
+    padding: 5px;
+    font-size: 14px;
+  }
+  /* Navbar links centered */
+  .navbar a {
+    text-align: center;
+  }
+  /* Dropdown styles for mobile */
+  .dropbtn {
+    font-size: 1.2em;
+  }
+  /* Show the navbar links in a menu icon when in mobile view */
+  .navbar-links {
+    display: none;
+  }
+
+  .menu-icon {
+    display: block;
+    margin: 3px;
+    font-size: 22px;
+  }
+
+  .show-menu {
+    display: block;
+  }
+}
+
+.dropbtn:hover {
+  color: silver;
+}
+
+.dropbtn span {
+  margin-right: 5px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.user {
+  cursor: pointer;
+  color: cadetblue;
+}
+
+.accButton {
+  color: #E74C3C;
+}
+
+.signupButton {
+  color: limegreen;
+  border: none;
+}
+
+.loginButton {
+  border: none;
+}
+
+.delete-confirmation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.confirmation-content {
+  background-color: #000;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  max-width: 300px;
+  text-align: center;
+}
+
+.delete-confirm-btn {
+  background-color: #f44336;
+  color: #fff;
+  padding: 8px 16px;
+  margin-right: 8px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.delete-cancel-btn {
+  background-color: #ccc;
+  color: #000;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}

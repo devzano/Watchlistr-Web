@@ -49,13 +49,13 @@ To get started with the app, follow these steps:
 - Add the following line with your TMDB API key:
   ```
   REACT_APP_TMDB_API_KEY=YOUR-API-KEY
-  REPLIT_BACKEND_URL=YOUR-BACKEND-URL
+  REACT_APP_REPLIT_BACKEND_URL=YOUR-BACKEND-URL
   ```
 
 7. **Deploy to Vercel:**
 - Create an account on [Vercel](https://vercel.com/signup).
 - Deploy your project.
-- Configure environmental variables on Vercel, including `REACT_APP_TMDB_API_KEY` `REPLIT_BACKEND_URL`.
+- Configure environmental variables on Vercel, including `REACT_APP_TMDB_API_KEY` `REACT_APP_REPLIT_BACKEND_URL`.
 - If importing from GitHub, ensure that the deployment root directory starts from `React`.
 
 ### Features

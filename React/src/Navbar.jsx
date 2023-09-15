@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './styles/Navbar.css';
 import logo from './styles/logo.svg';
 
-const replitBackendURL = process.env.REPLIT_BACKEND_URL;
+const replitBackendURL = process.env.REACT_APP_REPLIT_BACKEND_URL;
 
 const Navbar = (props) => {
   const {loggedIn, handleLogout, userId} = props;

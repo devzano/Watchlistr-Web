@@ -14,7 +14,7 @@ import bgImage4 from './styles/Screenshots/Login-Background3.jpg';
 import bgImage5 from './styles/Screenshots/Login-TVBackground.jpg';
 import bgImage6 from './styles/Screenshots/Login-TVBackground1.jpg';
 
-const replitBackendURL = process.env.REPLIT_BACKEND_URL;
+const replitBackendURL = process.env.REACT_APP_REPLIT_BACKEND_URL;
 
 const AuthForm = ({ onLogin }) => {
   const [username, setUsername] = useState('');
@@ -48,6 +48,7 @@ const AuthForm = ({ onLogin }) => {
       if (password === confirmPassword) {
         try {
           console.log(username, password);
+          console.log('Backend URL:', process.env.REACT_APP_REPLIT_BACKEND_URL);
           const formData = new URLSearchParams();
             formData.append('username', username);
             formData.append('password', password);
@@ -86,6 +87,7 @@ const AuthForm = ({ onLogin }) => {
       }
     } else {
       try {
+        console.log('Backend URL:', process.env.REACT_APP_REPLIT_BACKEND_URL);
         const formData = new URLSearchParams();
         formData.append('username', username);
         formData.append('password', password);

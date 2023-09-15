@@ -6,7 +6,7 @@ import './styles/LoadingIndicator.css'
 import './styles/MediaSearch.css';
 
 const apiKey = process.env.REACT_APP_TMDB_API_KEY;
-const replitBackendURL = process.env.REPLIT_BACKEND_URL;
+const replitBackendURL = process.env.REACT_APP_REPLIT_BACKEND_URL;
 
 const MediaSearch = () => {
   const [query, setQuery] = useState('');

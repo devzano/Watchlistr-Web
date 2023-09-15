@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const apiKey = process.env.REACT_APP_TMDB_API_KEY;
-const replitBackendURL = process.env.REPLIT_BACKEND_URL;
+const replitBackendURL = process.env.REACT_APP_REPLIT_BACKEND_URL;
 
 const ShowsProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);

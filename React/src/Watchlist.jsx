@@ -4,7 +4,7 @@ import axios from 'axios';
 import './styles/Poster.css';
 import './styles/Titles.css';
 
-const replitBackendURL = process.env.REPLIT_BACKEND_URL;
+const replitBackendURL = process.env.REACT_APP_REPLIT_BACKEND_URL;
 
 function Watchlist() {
   const [movies, setMovies] = useState([]);

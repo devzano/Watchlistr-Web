@@ -9,6 +9,7 @@ Watchlistr is a web application that allows you to create an account to search f
 This project is the inception of my journey into project development. Should you wish to adapt and enhance it, you're welcome to do so. I encourage a thorough read for seamless building and deployment of your Watchlistr website.
 
 ### Built Using
+
 * Vercel
 * React
 * Node.js
@@ -24,13 +25,15 @@ This project is the inception of my journey into project development. Should you
 
 To get started with the app, follow these steps:
 
-1. **Clone the Repository:** ```git clone https://github.com/devzano/Watchlistr-Web.git```
+1. **Clone the Repository:**
+- ```git clone https://github.com/devzano/Watchlistr-Web.git```
 
 2. **Install Dependencies:**
-- Run `npm install` in both the root directory and another directory.
+- Run `npm install` in the root directory of `React` & `Express:MySQL`.
 
 3. **Set Up the Database:**
 - Signup for a free database with [FreeDBTech](https://freedb.tech/register.html).
+- Replace ***`user`*** & ***`database`*** with your __`user`__ & __`database`__ inside `Express:MySQL/index.js`.
 - Access [PHPMyAdmin](https://phpmyadmin.freedb.tech/index.php?route=/) via the FreeDB Free Database Panel.
 - Input database credentials to login.
 - Add the SQL queries from `data.sql` to set up the database.
@@ -39,18 +42,24 @@ To get started with the app, follow these steps:
 - Signup for an account on [Replit](https://replit.com/signup).
 - Create a template using Node.js.
 - Input the code from `index.js` into the template.
+- Create a secret called `DATABASE_PASSWORD` with the values of your database password.
 
 5. **Obtain a TMDB API Key:**
 - Signup for an account on [TMDB](https://www.themoviedb.org/account/signup).
 - Obtain an API key.
 
 6. **Create Environment Variables:**
-- In the root directory, create a file called `.env`.
-- Add the following line with your TMDB API key:
+- In the root directory of `React` & `Express:MySQL`, create a file called `.env`.
+- Add the following lines to ***React***:
   ```
   REACT_APP_TMDB_API_KEY=YOUR-API-KEY
   REACT_APP_REPLIT_BACKEND_URL=YOUR-BACKEND-URL
   ```
+- Add the following lines to ***Express:MySQL***:
+  ```
+  DATABASE_PASSWORD=YOUR-DB-PASS
+  ```
+  <sup><sub>Note: If the password has special characters, put it in quotes.</sub></sup>
 
 7. **Deploy to Vercel:**
 - Create an account on [Vercel](https://vercel.com/signup).

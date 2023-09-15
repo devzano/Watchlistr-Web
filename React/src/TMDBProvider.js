@@ -4,7 +4,9 @@ import ShowsContext from './Context';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 const apiKey = process.env.REACT_APP_TMDB_API_KEY;
+const replitBackendURL = process.env.REPLIT_BACKEND_URL;
 
 const ShowsProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
@@ -163,7 +165,7 @@ const ShowsProvider = ({ children }) => {
         },
       };
 
-      const response = await axios.post('https://watchlistr.rubenizag.repl.co/user-watchlist-movie', formData.toString(), config);
+      const response = await axios.post(`https://${replitBackendURL}/user-watchlist-movie`, formData.toString(), config);
       if (response === 'success') {
 
         toast.success(`${movie.title} added to watchlist!`, { autoClose: 2000, theme: 'dark' });
@@ -205,7 +207,7 @@ const ShowsProvider = ({ children }) => {
         },
       };
 
-      const response = await axios.post('https://watchlistr.rubenizag.repl.co/user-watchlist-tv', formData.toString(), config);
+      const response = await axios.post(`https://${replitBackendURL}/user-watchlist-tv`, formData.toString(), config);
       if (response === 'success') {
         toast.success(`${tvShow.name} added to Watchlist!`, { autoClose: 2000, theme: 'dark' });
       }

@@ -14,6 +14,8 @@ import bgImage4 from './styles/Screenshots/Login-Background3.jpg';
 import bgImage5 from './styles/Screenshots/Login-TVBackground.jpg';
 import bgImage6 from './styles/Screenshots/Login-TVBackground1.jpg';
 
+const replitBackendURL = process.env.REPLIT_BACKEND_URL;
+
 const AuthForm = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -45,11 +47,11 @@ const AuthForm = ({ onLogin }) => {
     if (isSignup) {
       if (password === confirmPassword) {
         try {
-          console.log(username, password); // Check values here
+          console.log(username, password);
           const formData = new URLSearchParams();
             formData.append('username', username);
             formData.append('password', password);
-            const res = await axios.post('https://watchlistr.rubenizag.repl.co/signup', formData.toString(), {
+            const res = await axios.post(`https://${replitBackendURL}/signup`, formData.toString(), {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
@@ -62,7 +64,7 @@ const AuthForm = ({ onLogin }) => {
               const formData = new URLSearchParams();
               formData.append('username', username);
               formData.append('password', password);
-              const res = await axios.post('https://watchlistr.rubenizag.repl.co/login', formData.toString(), {
+              const res = await axios.post(`https://${replitBackendURL}/login`, formData.toString(), {
                   headers: {
                       'Content-Type': 'application/x-www-form-urlencoded',
                   },
@@ -87,7 +89,7 @@ const AuthForm = ({ onLogin }) => {
         const formData = new URLSearchParams();
         formData.append('username', username);
         formData.append('password', password);
-        const res = await axios.post('https://watchlistr.rubenizag.repl.co/login', formData.toString(), {
+        const res = await axios.post(`https://${replitBackendURL}/login`, formData.toString(), {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },

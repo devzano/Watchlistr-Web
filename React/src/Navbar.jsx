@@ -7,6 +7,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import './styles/Navbar.css';
 import logo from './styles/logo.svg';
 
+const replitBackendURL = process.env.REPLIT_BACKEND_URL;
+
 const Navbar = (props) => {
   const {loggedIn, handleLogout, userId} = props;
   const navi = useNavigate();
@@ -42,7 +44,7 @@ const Navbar = (props) => {
 
   const deleteAccount = async () => {
     try {
-        const res = await axios.delete(`https://watchlistr.rubenizag.repl.co/users/${username}`, {
+        const res = await axios.delete(`https://${replitBackendURL}/users/${username}`, {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
@@ -83,13 +85,9 @@ const Navbar = (props) => {
             </button>
               {showDropdown && (
                 <div className="dropdown-content">
-                  <button onClick={logoutOnly} className="accButton">
-                    Logout
-                  </button>
-                  <br />
-                  <button onClick={() => setShowDeleteConfirmation(true)} className="accButton">
-                    Delete Account
-                  </button>
+                  <button onClick={logoutOnly} className="accButton">Logout</button>
+                  <br/>
+                  <button onClick={() => setShowDeleteConfirmation(true)} className="accButton">Delete Account</button>
                 </div>
               )}
             </div>
@@ -99,21 +97,15 @@ const Navbar = (props) => {
               <div className="confirmation-content">
                 <h3>Confirm Delete</h3>
                 <p>Are you sure you want to delete your account?</p>
-                <button onClick={deleteAccount} className="delete-confirm-btn">
-                  Yes, Delete
-                </button>
-                <button onClick={() => setShowDeleteConfirmation(false)} className="delete-cancel-btn">
-                  Cancel
-                </button>
+                <button onClick={deleteAccount} className="delete-confirm-btn">Yes, Delete</button>
+                <button onClick={() => setShowDeleteConfirmation(false)} className="delete-cancel-btn">Cancel</button>
               </div>
             </div>
           )}
         </>
       ) : (
         loco.pathname !== '/' && (
-          <button onClick={navToSignup} className="signupButton">
-            Signup
-          </button>
+          <button onClick={navToSignup} className="signupButton">Signup</button>
         )
       )}
       {loggedIn && (

@@ -6,6 +6,7 @@ import './styles/LoadingIndicator.css'
 import './styles/MediaSearch.css';
 
 const apiKey = process.env.REACT_APP_TMDB_API_KEY;
+const replitBackendURL = process.env.REPLIT_BACKEND_URL;
 
 const MediaSearch = () => {
   const [query, setQuery] = useState('');
@@ -66,7 +67,7 @@ const MediaSearch = () => {
       return;
     }
     try {
-      await axios.post('http://watchlistr.rubenizag.repl.co/user-watchlist-movie', {
+      await axios.post(`http://${replitBackendURL}/user-watchlist-movie`, {
         movieId: movie.id,
         title: movie.title,
         releaseDate: movie.release_date,
@@ -93,7 +94,7 @@ const MediaSearch = () => {
       const firstAirDate = tvShow.first_air_date;
       const lastAirDate = tvShow.last_air_date;
       const airDates = firstAirDate + '/' + lastAirDate;
-      await axios.post('http://watchlistr.rubenizag.repl.co/user-watchlist-tv-show', {
+      await axios.post(`http://${replitBackendURL}/user-watchlist-tv-show`, {
         tvShowId: tvShow.id,
         name: tvShow.name,
         airDates: airDates,

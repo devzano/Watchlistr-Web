@@ -4,6 +4,8 @@ import axios from 'axios';
 import './styles/Poster.css';
 import './styles/Titles.css';
 
+const replitBackendURL = process.env.REPLIT_BACKEND_URL;
+
 function Watchlist() {
   const [movies, setMovies] = useState([]);
   const [tvShows, setTVShows] = useState([]);
@@ -21,7 +23,7 @@ function Watchlist() {
         },
       };
 
-      const res = await axios.post('https://watchlistr.rubenizag.repl.co/watchlist/movies', formData.toString(), config);
+      const res = await axios.post(`https://${replitBackendURL}/watchlist/movies`, formData.toString(), config);
       setMovies(res.data);
     }
     catch (error) {
@@ -41,7 +43,7 @@ function Watchlist() {
         },
       };
 
-      const res = await axios.post('https://watchlistr.rubenizag.repl.co/watchlist/tv', formData.toString(), config);
+      const res = await axios.post(`https://${replitBackendURL}/watchlist/tv`, formData.toString(), config);
       setTVShows(res.data);
     }
     catch (error) {
@@ -92,7 +94,7 @@ function Watchlist() {
         },
       };
 
-      const res = await axios.post('https://watchlistr.rubenizag.repl.co/deletemovies', formData.toString(), config);
+      const res = await axios.post(`https://${replitBackendURL}/deletemovies`, formData.toString(), config);
       if (res === 'delete') {
         console.log('Media Removed From Watchlist', movieInternalId);
       }
@@ -113,7 +115,7 @@ function Watchlist() {
         },
       };
 
-      const res = await axios.post('https://watchlistr.rubenizag.repl.co/deleteshow', formData.toString(), config);
+      const res = await axios.post(`https://${replitBackendURL}/deleteshow`, formData.toString(), config);
       if (res === 'delete') {
         console.log('Media Removed From Watchlist', tvShowInternalId);
       }

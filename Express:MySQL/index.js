@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken');
 const cors = require('cors')
 const mysql = require('mysql2/promise');
 const port = process.env.PORT || 3001;
+const dbPass = process.env['DATABASE_PASSWORD'];
 const secretKey = crypto.randomBytes(32).toString('hex');
 
 const sessionOptions = {
@@ -27,7 +28,7 @@ const pool = mysql.createPool({
   host: 'sql.freedb.tech',
   user: 'freedb_watchlistr_dev',
   port: 3306,
-  password: 'HQdV6YD#hgjV8sw',
+  password: dbPass,
   database: 'freedb_watchlistr',
   waitForConnections: true,
   connectionLimit: 10,

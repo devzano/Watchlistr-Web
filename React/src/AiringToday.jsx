@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import ShowsContext from './Context';
 import {Link} from 'react-router-dom';
-import {ToastContainer} from 'react-toastify';
+import {toast} from 'react-toastify';
 import './styles/Navbar.css';
 import './styles/LoadingIndicator.css';
 import './styles/Titles.css';
@@ -16,13 +16,12 @@ const AiringToday = () => {
         <div className="lds-ripple"><div></div><div></div></div>
       ) : (
         <div className="airing-today">
-          <ToastContainer/>
           <h2>TV Shows Airing Today</h2>
           {tvShows.map((tvShow) => (
             <div className="poster" key={tvShow.id}>
               <span>
                 <h3>{tvShow.name}</h3>
-                <button className="button-to-watchlist" onClick={() => addTVShowToWatchlist(tvShow)} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}><i className="fas fa-heart"></i></button>
+                <button className="button-to-watchlist" onClick={() => {addTVShowToWatchlist(tvShow); toast.success(`${tvShow.name} added to your watchlist.`, {autoClose: 2000, theme: 'dark'})}} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}><i className="fas fa-heart"></i></button>
                 {tvShow.poster_path ? (<img src={`https://image.tmdb.org/t/p/w500${tvShow.poster_path}`} width="300px" alt={tvShow.name}/>
                 ) : (<img src="https://static.displate.com/857x1200/displate/2022-04-15/7422bfe15b3ea7b5933dffd896e9c7f9_46003a1b7353dc7b5a02949bd074432a.jpg" width="300px" alt={tvShow.name}/>
                 )}

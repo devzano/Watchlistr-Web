@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import {toast} from 'react-toastify';
 import './styles/Poster.css';
 import './styles/LoadingIndicator.css'
 import './styles/MediaSearch.css';
@@ -60,54 +61,83 @@ const MediaSearch = () => {
     search("tv", "");
   };
 
+  // Add Movie To Watchlist
   const addMovieToWatchlist = async (movie) => {
-    const userId = sessionStorage.getItem('userId');
+    const userId = sessionStorage.getItem('username');
     if (!userId) {
-      alert('Login To Add Movies To Watchlist');
+      toast.info('Login to add movies to your Watchlist', {autoClose: 2000, theme: 'dark'});
       return;
     }
     try {
-      await axios.post(`http://${replitBackendURL}/user-watchlist-movie`, {
-        movieId: movie.id,
-        title: movie.title,
-        releaseDate: movie.release_date,
-        runtime: movie.runtime,
-        posterPath: movie.poster_path,
-        overview: movie.overview,
-        userId: userId
-      });
-      console.log(movie)
-      alert('Movie Added To Watchlist!');
+      const formData = new URLSearchParams();
+      formData.append('movieId', movie.id);
+      formData.append('title', movie.title);
+      formData.append('releaseDate', movie.release_date);
+      formData.append('runtime', movie.runtime);
+      formData.append('posterPath', movie.poster_path);
+      formData.append('overview', movie.overview);
+      formData.append('userId', userId);
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      };
+
+      const response = await axios.post(`https://${replitBackendURL}/user-watchlist-movie`, formData.toString(), config);
+      if (response === 'success') {
+
+        console.log(`${movie.title} added to watchlist!`);
+      }
     } catch (error) {
-      console.error(error);
-      alert('An Error Occurred While Adding The Movie To Your Watchlist. Please Try Again Later.');
+      if (error.response && error.response.data && error.response.data.message) {
+        // Display the error message from the server
+        toast.error(error.response.data.message, { autoClose: 2000, theme: 'dark' });
+      } else {
+        // If the error response does not contain a specific message, display a generic error message
+        toast.error('Error adding movie to watchlist. Please try again later.', { autoClose: 2000, theme: 'dark' });
+      }
     }
   };
 
+  // Add TV Show To Watchlist
   const addTVShowToWatchlist = async (tvShow) => {
-    const userId = sessionStorage.getItem('userId');
+    const userId = sessionStorage.getItem('username');
+    const firstAirDate = tvShow.first_air_date;
+    const lastAirDate = tvShow.last_air_date;
+    const airDates = firstAirDate + '/' + lastAirDate;
     if (!userId) {
-      alert('Login To Add TV Shows To Watchlist');
+      toast.info('Login to add TV Shows to your Watchlist', { autoClose: 2000, theme: 'dark' });
       return;
     }
     try {
-      const firstAirDate = tvShow.first_air_date;
-      const lastAirDate = tvShow.last_air_date;
-      const airDates = firstAirDate + '/' + lastAirDate;
-      await axios.post(`http://${replitBackendURL}/user-watchlist-tv-show`, {
-        tvShowId: tvShow.id,
-        name: tvShow.name,
-        airDates: airDates,
-        runtime: tvShow.episode_run_time[0],
-        posterPath: tvShow.poster_path,
-        overview: tvShow.overview,
-        userId: userId
-      });
-      console.log(tvShow)
-      alert('TV Show added to watchlist!');
+      const formData = new URLSearchParams();
+      formData.append('tvShowId', tvShow.id);
+      formData.append('name', tvShow.name);
+      formData.append('airDates', airDates);
+      formData.append('runtime', tvShow.episode_run_time[0]);
+      formData.append('posterPath', tvShow.poster_path);
+      formData.append('overview', tvShow.overview);
+      formData.append('userId', userId);
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      };
+
+      const response = await axios.post(`https://${replitBackendURL}/user-watchlist-tv`, formData.toString(), config);
+      if (response === 'success') {
+        console.log(`${tvShow.name} added to Watchlist!`);
+      }
     } catch (error) {
-      console.error(error);
-      alert('An Error Occurred While Adding The TV Show To Your Watchlist. Please Try Again Later.');
+      if (error.response && error.response.data && error.response.data.message) {
+        // Display the error message from the server
+        toast.error(error.response.data.message, { autoClose: 2000, theme: 'dark' });
+      } else {
+        // If the error response does not contain a specific message, display a generic error message
+        toast.error('Error adding tv show to watchlist. Please try again later.', { autoClose: 2000, theme: 'dark' });
+      }
     }
   };
 
@@ -127,7 +157,7 @@ const MediaSearch = () => {
           <div className="poster" key={movie.id}>
             <span>
               <h3>{movie.title}</h3>
-              <button className="button-to-watchlist" onClick={() => addMovieToWatchlist(movie)} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}><i className="fas fa-heart"></i></button>
+              <button className="button-to-watchlist" onClick={() => {addMovieToWatchlist(movie); toast.success(`${movie.title} added to your watchlist.`, {autoClose: 2000, theme: 'dark'})}} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}><i className="fas fa-heart"></i></button>
               <br/>
               {movie.poster_path ? (<img src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} width="300px" alt={movie.title} />
               ) : (<img src="https://static.displate.com/857x1200/displate/2022-04-15/7422bfe15b3ea7b5933dffd896e9c7f9_46003a1b7353dc7b5a02949bd074432a.jpg" width="300px" alt={movie.title}/>
@@ -167,8 +197,8 @@ const MediaSearch = () => {
         {currentTVShows.map((tvShow) => (
           <div className="poster" key={tvShow.id}>
             <span>
-              <h2>{tvShow.name}</h2>&nbsp;&nbsp;
-              <button className="button-to-watchlist" onClick={() => addTVShowToWatchlist(tvShow)} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>Add to Watchlist</button>
+              <h2>{tvShow.name}</h2>
+              <button className="button-to-watchlist" onClick={() => {addTVShowToWatchlist(tvShow); toast.success(`${tvShow.name} added to your watchlist.`, {autoClose: 2000, theme: 'dark'})}} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}><i className="fas fa-heart"></i></button>
               <br />
               {tvShow.poster_path ? (<img src={`https://image.tmdb.org/t/p/original/${tvShow.poster_path}`} width="300px" alt={tvShow.name} />
               ) : (<img src="https://static.displate.com/857x1200/displate/2022-04-15/7422bfe15b3ea7b5933dffd896e9c7f9_46003a1b7353dc7b5a02949bd074432a.jpg" width="300px" alt={tvShow.name}/>
@@ -211,20 +241,24 @@ const MediaSearch = () => {
     <div className="nav-container">
       <button onClick={toggleMovieForm} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>Movie Search</button>
       <button onClick={toggleTVShowForm} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>TV Show Search</button>
-      {showMovieForm && (
-        <form className="media-search" onSubmit={searchMovies} role="form" style={{boxShadow: "none"}}>
-            <input type="text" id="query" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="movie title"/>
-            <button type="submit" onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>Search</button>
-            {loading ? <div className="lds-ripple"><div></div><div></div></div> : renderMovies()}
-        </form>
-      )}
-      {showTVShowForm && (
-        <form className="media-search" onSubmit={searchTVShows} role="form" style={{boxShadow: "none"}}>
-            <input type="text" id="query" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="tv show name"/>
-            <button onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>Search</button>
-            {loading ? <div className="lds-ripple"><div></div><div></div></div> : renderTVShows()}
-        </form>
-      )}
+  {showMovieForm && (
+    <form className="media-search" onSubmit={searchMovies} style={{ boxShadow: "none" }}>
+      <input type="text" id="query" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="movie title"/>
+      <button type="submit" onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>Search</button>
+      <div>
+        {loading ? <div className="lds-ripple"><div></div><div></div></div> : renderMovies()}
+      </div>
+    </form>
+  )}
+  {showTVShowForm && (
+    <form className="media-search" onSubmit={searchTVShows} style={{ boxShadow: "none" }}>
+      <input type="text" id="query" value={query}onChange={(e) => setQuery(e.target.value)} placeholder="tv show name"/>
+      <button onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>Search</button>
+      <div>
+        {loading ? <div className="lds-ripple"><div></div><div></div></div> : renderTVShows()}
+      </div>
+    </form>
+  )}
     </div>
   );
 };

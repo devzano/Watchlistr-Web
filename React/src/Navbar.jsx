@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import {NavLink, useNavigate, useLocation} from 'react-router-dom';
-import {ToastContainer, toast} from 'react-toastify';
+import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './styles/Navbar.css';
 import logo from './styles/logo.svg';
@@ -10,6 +10,7 @@ import logo from './styles/logo.svg';
 const replitBackendURL = process.env.REACT_APP_REPLIT_BACKEND_URL;
 
 const Navbar = (props) => {
+  // eslint-disable-next-line
   const {loggedIn, handleLogout, userId} = props;
   const navi = useNavigate();
   const loco = useLocation();
@@ -52,9 +53,9 @@ const Navbar = (props) => {
         if (res.data.error) {
             toast.error(res.data.error);
         } else {
+            setShowDeleteConfirmation(false)
             handleLogout();
             navi('/');
-            toast.success('Account deleted successfully!');
         }
     } catch (error) {
         toast.error('Error deleting account, please try again later.');
@@ -72,7 +73,6 @@ const Navbar = (props) => {
     <nav className="navbar">
       {loggedIn ? (
         <>
-        <ToastContainer/>
           <div className="header-container">
           {showMenuIcon && (
           <img className="logo menu-icon" onClick={toggleMenu} src={logo} alt="Logo"/>

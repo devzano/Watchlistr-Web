@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
+import {toast} from 'react-toastify';
 import './styles/Poster.css';
 import './styles/Titles.css';
 
@@ -16,18 +17,16 @@ function Watchlist() {
     try {
       const formData = new URLSearchParams();
       formData.append('username', username);
-
       const config = {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
       };
-
       const res = await axios.post(`https://${replitBackendURL}/watchlist/movies`, formData.toString(), config);
       setMovies(res.data);
     }
     catch (error) {
-
+      toast.error('Error Fetching Movies From Watchlist', {autoClose: 2000, theme: 'dark'});
     }
   }
 
@@ -36,25 +35,24 @@ function Watchlist() {
     try {
       const formData = new URLSearchParams();
       formData.append('username', username);
-
       const config = {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
       };
-
       const res = await axios.post(`https://${replitBackendURL}/watchlist/tv`, formData.toString(), config);
       setTVShows(res.data);
     }
     catch (error) {
-
+      toast.error('Error Fetching TV Shows From Watchlist', {autoClose: 2000, theme: 'dark'});
     }
   }
 
   useEffect(() => {
-    const userId = sessionStorage.getItem('userId');
+    // const userId = sessionStorage.getItem('userId');
     fetchMovies()
     fetchTv()
+    // eslint-disable-next-line
   }, []);
 
   const removeFromMovies = (movieId) => {
@@ -68,17 +66,26 @@ function Watchlist() {
   const removeMovieFromWatchlist = async (movie) => {
     const userId = sessionStorage.getItem('username');
     console.log('Removing media', movie.movieId, 'for user', userId);
-    await deleteMovieFromWatchlist(userId, movie.movieId);
-    if (showMedia) {
+    try {
+      await deleteMovieFromWatchlist(userId, movie.movieId);
       removeFromMovies(movie.movieId);
+      toast.success(`Removed movie ${movie.title} from watchlist`, {autoClose: 2000, theme: 'dark'});
+    } catch (error) {
+      console.error(error);
+      toast.error('Error Removing Movie From Watchlist', {autoClose: 2000, theme: 'dark'});
     }
   };
+
   const removeTVShowFromWatchlist = async (tvShow) => {
     const userId = sessionStorage.getItem('username');
     console.log('Removing media', tvShow.tvShowId, 'for user', userId);
-    await deleteTVShowFromWatchlist(userId, tvShow.tvShowId);
-    if (!showMedia) {
+    try {
+      await deleteTVShowFromWatchlist(userId, tvShow.tvShowId);
       removeFromTVShows(tvShow.tv_show_id);
+      toast.success(`Removed TV show ${tvShow.name} from watchlist`, {autoClose: 2000, theme: 'dark'});
+    } catch (error) {
+      console.error(error);
+      toast.error('Error Removing TV Show From Watchlist', {autoClose: 2000, theme: 'dark'});
     }
   };
 
@@ -96,11 +103,11 @@ function Watchlist() {
 
       const res = await axios.post(`https://${replitBackendURL}/deletemovies`, formData.toString(), config);
       if (res === 'delete') {
-        console.log('Media Removed From Watchlist', movieInternalId);
+        console.log('Movie Removed From Watchlist', movieInternalId);
       }
-    } catch (err) {
-      console.error(err);
-      console.log('Error Removing Media From Watchlist');
+    } catch (error) {
+      console.error(error);
+      toast.error('Error Removing Movie From Watchlist', {autoClose: 2000, theme: 'dark'});
     }
   };
   const deleteTVShowFromWatchlist = async (userId, tvShowInternalId) => {
@@ -117,11 +124,11 @@ function Watchlist() {
 
       const res = await axios.post(`https://${replitBackendURL}/deleteshow`, formData.toString(), config);
       if (res === 'delete') {
-        console.log('Media Removed From Watchlist', tvShowInternalId);
+        console.log('TV Show Removed From Watchlist', tvShowInternalId);
       }
-    } catch (err) {
-      console.error(err);
-      console.log('Error Removing Media From Watchlist');
+    } catch (error) {
+      console.error(error);
+      toast.error('Error Removing TV Show From Watchlist', {autoClose: 2000, theme: 'dark'});
     }
   };
 

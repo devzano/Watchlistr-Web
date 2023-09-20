@@ -93,7 +93,7 @@ const ShowsProvider = ({ children }) => {
         setPopTvShows(tvShowDetails);
         setLoading(false);
       } catch (error) {
-        toast.error('An error occurred while fetching Popular Movies and TV Shows. Please try again later.', { autoClose: 2000, theme: 'dark' });
+        toast.error('An error occurred while fetching Popular Movies and TV Shows. Please try again later.', {autoClose: 2000, theme: 'dark'});
         setLoading(false);
       }
     };
@@ -135,7 +135,7 @@ const ShowsProvider = ({ children }) => {
         setTopTvShows(tvShowDetails);
         setLoading(false);
       } catch (error) {
-        toast.error('An error occurred while fetching Top Rated Movies and TV Shows. Please try again later.', { autoClose: 2000, theme: 'dark' });
+        toast.error('An error occurred while fetching Top Rated Movies and TV Shows. Please try again later.', {autoClose: 2000, theme: 'dark'});
         setLoading(false);
       }
     };
@@ -146,7 +146,7 @@ const ShowsProvider = ({ children }) => {
   const addMovieToWatchlist = async (movie) => {
     const userId = sessionStorage.getItem('username');
     if (!userId) {
-      toast.info('Login to add movies to your Watchlist', { autoClose: 2000, theme: 'dark' });
+      toast.info('Login to add movies to your Watchlist', {autoClose: 2000, theme: 'dark'});
       return;
     }
     try {
@@ -168,7 +168,7 @@ const ShowsProvider = ({ children }) => {
       const response = await axios.post(`https://${replitBackendURL}/user-watchlist-movie`, formData.toString(), config);
       if (response === 'success') {
 
-        toast.success(`${movie.title} added to watchlist!`, { autoClose: 2000, theme: 'dark' });
+        console.log(`${movie.title} added to watchlist!`);
       }
     } catch (error) {
       if (error.response && error.response.data && error.response.data.message) {
@@ -209,7 +209,7 @@ const ShowsProvider = ({ children }) => {
 
       const response = await axios.post(`https://${replitBackendURL}/user-watchlist-tv`, formData.toString(), config);
       if (response === 'success') {
-        toast.success(`${tvShow.name} added to Watchlist!`, { autoClose: 2000, theme: 'dark' });
+        console.log(`${tvShow.name} added to Watchlist!`);
       }
     } catch (error) {
       if (error.response && error.response.data && error.response.data.message) {

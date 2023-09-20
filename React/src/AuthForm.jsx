@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
+import {useNavigate} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './styles/Navbar.css';
 import './styles/AuthForm.css';
+import './styles/LoadingIndicator.css'
 
 import bgImage1 from './styles/Screenshots/Login-Background.jpg';
 import bgImage2 from './styles/Screenshots/Login-Background1.jpg';
@@ -22,6 +23,7 @@ const AuthForm = ({ onLogin }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [backgroundImage, setBackgroundImage] = useState(bgImage1);
   const [isSignup, setIsSignup] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const images = [bgImage1, bgImage2, bgImage3, bgImage4, bgImage5, bgImage6];
@@ -47,8 +49,7 @@ const AuthForm = ({ onLogin }) => {
     if (isSignup) {
       if (password === confirmPassword) {
         try {
-          console.log(username, password);
-          console.log('Backend URL:', process.env.REACT_APP_REPLIT_BACKEND_URL);
+          setIsLoading(true);
           const formData = new URLSearchParams();
             formData.append('username', username);
             formData.append('password', password);
@@ -74,9 +75,12 @@ const AuthForm = ({ onLogin }) => {
               sessionStorage.setItem('userId', res.data.userId);
               sessionStorage.setItem('username', res.data.username);
               navi('/popular-media');
-              toast.success('Login Successful!');
+              setTimeout(() => {
+                toast.success('Account Created Successfully!', {autoClose: 2000, theme: 'dark'})
+              }, 100);
+              setIsLoading(false);
             } catch (error) {
-              toast.error(error.response.data.error, { autoClose: 2000, theme: 'dark' });
+              toast.error(error.response.data.error, {autoClose: 2000, theme: 'dark'});
             }
           }
         } catch (error) {
@@ -87,7 +91,7 @@ const AuthForm = ({ onLogin }) => {
       }
     } else {
       try {
-        console.log('Backend URL:', process.env.REACT_APP_REPLIT_BACKEND_URL);
+        setIsLoading(true);
         const formData = new URLSearchParams();
         formData.append('username', username);
         formData.append('password', password);
@@ -99,31 +103,29 @@ const AuthForm = ({ onLogin }) => {
         onLogin(res.data.userId);
         sessionStorage.setItem('userId', res.data.userId);
         sessionStorage.setItem('username', res.data.username);
-        toast.success('Login Successful!');
+        setTimeout(() => {
+          toast.success('Login Successful!', {autoClose: 2000, theme: 'dark'});
+        }, 100);
         navi('/popular-media');
+        setIsLoading(false);
       } catch (error) {
-        toast.error(error.response.data.error, { autoClose: 2000, theme: 'dark' });
+        toast.error(error.response.data.error, {autoClose: 2000, theme: 'dark'});
       }
     }
   };
 
   return (
-    <div className={isSignup ? 'signup' : 'login'} style={{ backgroundImage: `url(${backgroundImage})` }}>
+    <div className={isSignup ? 'signup' : 'login'} style={{backgroundImage: `url(${backgroundImage})`}}>
       <form className={isSignup ? 'signup-form' : 'login-form'} onSubmit={handleSubmit}>
-        <ToastContainer />
         <h1>Welcome to Watchlistr</h1>
-        <label>Username:<input type="text" value={username} onChange={(e) => setUsername(e.target.value)} /></label><br />
-        <label>Password:<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} /></label><br />
-        {isSignup && (
-          <label>Confirm Password:<input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} /></label>
+        <label>Username:<input type="text" value={username} onChange={(e) => setUsername(e.target.value)}/></label><br/>
+        <label>Password:<input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/></label><br/>
+        {isSignup && (<label>Confirm Password:<input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} /></label>)}
+        <br/>
+        {isLoading ? (<div className="lds-ripple"><div></div><div></div></div>) : (
+          <button className="authForm-button" type="submit" onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>{isSignup ? 'Signup' : 'Login'}</button>
         )}
-        <br />
-        <button className="authForm-button" type="submit" onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>
-          {isSignup ? 'Signup' : 'Login'}
-        </button>
-        <button className="authForm-button" type="button" onClick={() => setIsSignup(!isSignup)} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>
-          {isSignup ? 'Switch to Login' : 'No account? Signup'}
-        </button>
+        <button className="authForm-button" type="button" onClick={() => setIsSignup(!isSignup)} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>{isSignup ? 'Switch to Login' : 'No account? Signup'}</button>
       </form>
     </div>
   );

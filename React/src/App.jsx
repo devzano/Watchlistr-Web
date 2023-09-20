@@ -14,6 +14,7 @@ import Reviews from './Reviews.jsx';
 import UpcomingMovies from './UpcomingMovies.jsx';
 import AiringToday from './AiringToday.jsx';
 import ShowsProvider from './TMDBProvider';
+import {ToastContainer} from 'react-toastify';
 import './styles/App.css';
 
 function App() {
@@ -48,12 +49,13 @@ function App() {
     setUserId(null);
   };
 
-  console.log('userId:', userId);
+  console.log('userID:', userId);
 
   return (
      <div className="App">
       <Router>
         <ShowsProvider>
+        <ToastContainer/>
         <Navbar userId={userId} loggedIn={loggedIn} onLogin={handleLogin} handleLogout={handleLogout}/>
         <Routes>
           <Route path="/" element={<AuthForm onLogin={handleLogin} isSignup/>}/>

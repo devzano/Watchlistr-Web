@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import ShowsContext from './Context';
 import {Link} from 'react-router-dom';
-import {ToastContainer} from 'react-toastify';
+import {toast} from 'react-toastify';
 import './styles/Navbar.css';
 import './styles/LoadingIndicator.css';
 import './styles/Titles.css';
@@ -16,14 +16,13 @@ const UpcomingMovies = () => {
         <div className="lds-ripple"><div></div><div></div></div>
       ) : (
         <div className="upcoming">
-          <ToastContainer/>
           <h2>Upcoming Movies</h2>
           {movies && movies.length > 0 ? (
             movies.map((movie) => (
               <div className="poster" key={movie.id}>
                 <span>
                   <h3>{movie.title}</h3>&nbsp;&nbsp;
-                  <button className="button-to-watchlist" onClick={() => addMovieToWatchlist(movie)} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}><i className="fas fa-heart"></i></button>
+                  <button className="button-to-watchlist" onClick={() => {addMovieToWatchlist(movie); toast.success(`${movie.title} added to your watchlist.`, {autoClose: 2000, theme: 'dark'})}} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}><i className="fas fa-heart"></i></button>
                   <br/>
                   {movie.poster_path ? (
                     <img src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} width="300px" alt={movie.title} />

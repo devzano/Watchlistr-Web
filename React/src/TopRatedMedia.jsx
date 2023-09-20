@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {Link} from 'react-router-dom';
 import ShowsContext from './Context';
-import {ToastContainer} from 'react-toastify';
+import {toast} from 'react-toastify';
 import './styles/LoadingIndicator.css';
 import './styles/Titles.css';
 import './styles/Poster.css';
@@ -21,12 +21,11 @@ const TopRatedMedia = () => {
               <h2>Top Rated Movies</h2>
               <button onClick={toggleMedia} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>{showMedia ? (<i className="fas fa-tv"></i>) : (<i className="fas fa-film"></i>)}</button>
             </div>
-            <ToastContainer/>
             {topMovies.map((movie, index) => (
               <div className="poster" key={index}>
                 <span>
-                  <h3>{movie.title}</h3>&nbsp;&nbsp;
-                  <button className="button-to-watchlist" onClick={() => addMovieToWatchlist(movie)} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}><i className="fas fa-heart"></i></button>
+                  <h3>{movie.title}</h3>
+                  <button className="button-to-watchlist" onClick={() => {addMovieToWatchlist(movie); toast.success(`${movie.title} added to your watchlist.`, {autoClose: 2000, theme: 'dark'})}} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}><i className="fas fa-heart"></i></button>
                   {movie.poster_path ? (
                     <img src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} width='300px' alt={movie.title}/>
                     ) : (
@@ -61,12 +60,11 @@ const TopRatedMedia = () => {
                 <h2>Top Rated TV Shows</h2>
                 <button onClick={toggleMedia} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>{showMedia ? (<i className="fas fa-tv"></i>) : (<i className="fas fa-film"></i>)}</button>
               </div>
-              <ToastContainer/>
               {topTvShows.map((tvShow, index) => (
                 <div className="poster" key={index}>
                   <span>
-                    <h3>{tvShow.name}</h3>&nbsp;&nbsp;
-                    <button className="button-to-watchlist" onClick={() => addTVShowToWatchlist(tvShow)} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}><i className="fas fa-heart"></i></button>
+                    <h3>{tvShow.name}</h3>
+                    <button className="button-to-watchlist" onClick={() => {addTVShowToWatchlist(tvShow); toast.success(`${tvShow.name} added to your watchlist.`, {autoClose: 2000, theme: 'dark'})}} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}><i className="fas fa-heart"></i></button>
                     {tvShow.poster_path ? (
                       <img src={`https://image.tmdb.org/t/p/original/${tvShow.poster_path}`} width='300px' alt={tvShow.name}/>
                       ) : (

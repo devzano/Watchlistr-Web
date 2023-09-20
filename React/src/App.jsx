@@ -14,7 +14,7 @@ import Reviews from './Reviews.jsx';
 import UpcomingMovies from './UpcomingMovies.jsx';
 import AiringToday from './AiringToday.jsx';
 import ShowsProvider from './TMDBProvider';
-import {ToastContainer} from 'react-toastify';
+import {ToastContainer, toast} from 'react-toastify';
 import './styles/App.css';
 
 function App() {
@@ -37,6 +37,7 @@ function App() {
       localStorage.setItem('loggedIn', 'true');
       setUserId(userId);
       setLoggedIn(true);
+      toast.success("Logged In Successfully!", {autoClose: 2000, theme: 'dark'})
     } else {
       setLoggedIn(false);
     }
@@ -47,6 +48,7 @@ function App() {
     localStorage.clear();
     setLoggedIn(false);
     setUserId(null);
+    toast.success("Logged Out Successfully!", {autoClose: 2000, theme: 'dark'})
   };
 
   console.log('userID:', userId);

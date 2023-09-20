@@ -75,9 +75,6 @@ const AuthForm = ({ onLogin }) => {
               sessionStorage.setItem('userId', res.data.userId);
               sessionStorage.setItem('username', res.data.username);
               navi('/popular-media');
-              setTimeout(() => {
-                toast.success('Account Created Successfully!', {autoClose: 2000, theme: 'dark'})
-              }, 100);
               setIsLoading(false);
             } catch (error) {
               toast.error(error.response.data.error, {autoClose: 2000, theme: 'dark'});
@@ -103,9 +100,6 @@ const AuthForm = ({ onLogin }) => {
         onLogin(res.data.userId);
         sessionStorage.setItem('userId', res.data.userId);
         sessionStorage.setItem('username', res.data.username);
-        setTimeout(() => {
-          toast.success('Login Successful!', {autoClose: 2000, theme: 'dark'});
-        }, 100);
         navi('/popular-media');
         setIsLoading(false);
       } catch (error) {

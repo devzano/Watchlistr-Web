@@ -81,9 +81,11 @@ const AuthForm = ({ onLogin }) => {
             }
           }
         } catch (error) {
+          setIsLoading(false);
           toast.error('Error While Signing Up, Please Try Again Later.');
         }
       } else {
+        setIsLoading(false);
         toast.error("Password Don't Match!");
       }
     } else {
@@ -103,8 +105,21 @@ const AuthForm = ({ onLogin }) => {
         navi('/popular-media');
         setIsLoading(false);
       } catch (error) {
+        setIsLoading(false);
         toast.error(error.response.data.error, {autoClose: 2000, theme: 'dark'});
       }
+    }
+  };
+
+  const areInputsValid = () => {
+    if (isSignup) {
+      const isUsernameValid = username.trim().length >= 6;
+      const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&!])[A-Za-z\d@#$%^&!]*$/;
+      const isPasswordValid = password.match(passwordRegex);
+      const doPasswordsMatch = password === confirmPassword;
+      return isUsernameValid && isPasswordValid && doPasswordsMatch;
+    } else {
+      return username.trim() !== '' && password.trim() !== '';
     }
   };
 
@@ -117,7 +132,7 @@ const AuthForm = ({ onLogin }) => {
         {isSignup && (<label>Confirm Password:<input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} /></label>)}
         <br/>
         {isLoading ? (<div className="lds-ripple"><div></div><div></div></div>) : (
-          <button className="authForm-button" type="submit" onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>{isSignup ? 'Signup' : 'Login'}</button>
+          <button className="authForm-button" type="submit" onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)} disabled={!areInputsValid()}>{isSignup ? 'Signup' : 'Login'}</button>
         )}
         <button className="authForm-button" type="button" onClick={() => setIsSignup(!isSignup)} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>{isSignup ? 'Switch to Login' : 'No account? Signup'}</button>
       </form>

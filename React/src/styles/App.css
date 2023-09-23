@@ -16,14 +16,6 @@ label {
   margin-bottom: 10px;
 }
 
-input {
-  padding: 8px;
-  border-radius: 4px;
-  border: none;
-  margin-left: 10px;
-  font-family: 'Nova Flat', sans-serif;
-}
-
 button {
   background-color: transparent;
   border: 1px solid dodgerblue;

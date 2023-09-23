@@ -18,11 +18,12 @@ import bgImage6 from './styles/Screenshots/Login-TVBackground1.jpg';
 const replitBackendURL = process.env.REACT_APP_REPLIT_BACKEND_URL;
 
 const AuthForm = ({ onLogin }) => {
+  const [isSignup, setIsSignup] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const isPasswordMatching = password === confirmPassword;
   const [backgroundImage, setBackgroundImage] = useState(bgImage1);
-  const [isSignup, setIsSignup] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -127,9 +128,10 @@ const AuthForm = ({ onLogin }) => {
     <div className={isSignup ? 'signup' : 'login'} style={{backgroundImage: `url(${backgroundImage})`}}>
       <form className={isSignup ? 'signup-form' : 'login-form'} onSubmit={handleSubmit}>
         <h1>Welcome to Watchlistr</h1>
-        <label>Username:<input type="text" value={username} onChange={(e) => setUsername(e.target.value)}/></label><br/>
-        <label>Password:<input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/></label><br/>
-        {isSignup && (<label>Confirm Password:<input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} /></label>)}
+        <label>Username:<input className="authForm-input" type="text" value={username} onChange={(e) => setUsername(e.target.value)}/></label><br/>
+        <label>Password:<input className="authForm-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)}/></label><br/>
+        {isSignup && (<label>Confirm Password:<input className="authForm-input" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} style={{
+        borderColor: password ? (isPasswordMatching ? 'seagreen' : 'crimson') : ''}}/></label>)}
         {isSignup && (
           <div className="password-requirements">
           <p>Your password must meet the following criteria:</p>

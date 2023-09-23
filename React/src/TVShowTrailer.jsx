@@ -66,7 +66,7 @@ function TVShowTrailers() {
       {renderTrailers()}
       <div>
         {Array.from({length: totalPages}).map((_, index) => (
-          <button key={index} onClick={() => handlePageClick(index + 1)} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>
+          <button key={index} onClick={() => handlePageClick(index + 1)}>
             {index + 1}
           </button>
         ))}

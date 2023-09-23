@@ -157,7 +157,7 @@ const MediaSearch = () => {
           <div className="poster" key={movie.id}>
             <span>
               <h3>{movie.title}</h3>
-              <button className="button-to-watchlist" onClick={() => {addMovieToWatchlist(movie); toast.success(`${movie.title} added to your watchlist.`, {autoClose: 2000, theme: 'dark'})}} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}><i className="fas fa-heart"></i></button>
+              <button className="button-to-watchlist" onClick={() => {addMovieToWatchlist(movie); toast.success(`${movie.title} added to your watchlist.`, {autoClose: 2000, theme: 'dark'})}}><i className="fas fa-heart"></i></button>
               <br/>
               {movie.poster_path ? (<img src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} width="300px" alt={movie.title} />
               ) : (<img src="https://static.displate.com/857x1200/displate/2022-04-15/7422bfe15b3ea7b5933dffd896e9c7f9_46003a1b7353dc7b5a02949bd074432a.jpg" width="300px" alt={movie.title}/>
@@ -198,7 +198,7 @@ const MediaSearch = () => {
           <div className="poster" key={tvShow.id}>
             <span>
               <h2>{tvShow.name}</h2>
-              <button className="button-to-watchlist" onClick={() => {addTVShowToWatchlist(tvShow); toast.success(`${tvShow.name} added to your watchlist.`, {autoClose: 2000, theme: 'dark'})}} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}><i className="fas fa-heart"></i></button>
+              <button className="button-to-watchlist" onClick={() => {addTVShowToWatchlist(tvShow); toast.success(`${tvShow.name} added to your watchlist.`, {autoClose: 2000, theme: 'dark'})}}><i className="fas fa-heart"></i></button>
               <br />
               {tvShow.poster_path ? (<img src={`https://image.tmdb.org/t/p/original/${tvShow.poster_path}`} width="300px" alt={tvShow.name} />
               ) : (<img src="https://static.displate.com/857x1200/displate/2022-04-15/7422bfe15b3ea7b5933dffd896e9c7f9_46003a1b7353dc7b5a02949bd074432a.jpg" width="300px" alt={tvShow.name}/>
@@ -208,16 +208,16 @@ const MediaSearch = () => {
               <p>Runtime: {tvShow.episode_run_time[0]}mins</p>
               <p>Genres: {tvShow.genres.map((genre) => genre.name).join(', ')}</p>
               <p>{tvShow.overview}</p>
-              <Link to={`/tv-shows/${tvShow.id}`} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>View Trailers</Link>
+              <Link to={`/tv-shows/${tvShow.id}`}>View Trailers</Link>
               <br/>
-              <Link to={`/tv-shows/${tvShow.id}/reviews`} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>Reviews</Link>
+              <Link to={`/tv-shows/${tvShow.id}/reviews`}>Reviews</Link>
             </span>
           </div>
         ))}
         {totalPages > 1 && (
           <div className="pagination">
             {Array.from({length: totalPages}).map((_, index) => (
-              <button key={index} onClick={() => handlePageClick(index + 1)} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>{index + 1}</button>
+              <button key={index} onClick={() => handlePageClick(index + 1)}>{index + 1}</button>
             ))}
           </div>
         )}
@@ -239,12 +239,12 @@ const MediaSearch = () => {
 
   return (
     <div className="nav-container">
-      <button onClick={toggleMovieForm} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>Movie Search</button>
-      <button onClick={toggleTVShowForm} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>TV Show Search</button>
+      <button onClick={toggleMovieForm}>Movie Search</button>
+      <button onClick={toggleTVShowForm}>TV Show Search</button>
   {showMovieForm && (
     <form className="media-search" onSubmit={searchMovies} style={{ boxShadow: "none" }}>
       <input type="text" id="query" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="movie title"/>
-      <button type="submit" onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>Search</button>
+      <button type="submit">Search</button>
       <div>
         {loading ? <div className="lds-ripple"><div></div><div></div></div> : renderMovies()}
       </div>
@@ -253,7 +253,7 @@ const MediaSearch = () => {
   {showTVShowForm && (
     <form className="media-search" onSubmit={searchTVShows} style={{ boxShadow: "none" }}>
       <input type="text" id="query" value={query}onChange={(e) => setQuery(e.target.value)} placeholder="tv show name"/>
-      <button onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>Search</button>
+      <button>Search</button>
       <div>
         {loading ? <div className="lds-ripple"><div></div><div></div></div> : renderTVShows()}
       </div>

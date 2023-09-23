@@ -21,7 +21,7 @@ const AiringToday = () => {
             <div className="poster" key={tvShow.id}>
               <span>
                 <h3>{tvShow.name}</h3>
-                <button className="button-to-watchlist" onClick={() => {addTVShowToWatchlist(tvShow); toast.success(`${tvShow.name} added to your watchlist.`, {autoClose: 2000, theme: 'dark'})}} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}><i className="fas fa-heart"></i></button>
+                <button className="button-to-watchlist" onClick={() => {addTVShowToWatchlist(tvShow); toast.success(`${tvShow.name} added to your watchlist.`, {autoClose: 2000, theme: 'dark'})}}><i className="fas fa-heart"></i></button>
                 {tvShow.poster_path ? (<img src={`https://image.tmdb.org/t/p/w500${tvShow.poster_path}`} width="300px" alt={tvShow.name}/>
                 ) : (<img src="https://static.displate.com/857x1200/displate/2022-04-15/7422bfe15b3ea7b5933dffd896e9c7f9_46003a1b7353dc7b5a02949bd074432a.jpg" width="300px" alt={tvShow.name}/>
                 )}
@@ -39,9 +39,9 @@ const AiringToday = () => {
                   <p>Genres: N/A</p>
                 )}
                 <p>{tvShow.overview}</p>
-                <Link to={`/tv-shows/${tvShow.id}`} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>View Trailers</Link>
+                <Link to={`/tv-shows/${tvShow.id}`} >View Trailers</Link>
                 <br/>
-                <Link to={`/tv-shows/${tvShow.id}/reviews`} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>Reviews</Link>
+                <Link to={`/tv-shows/${tvShow.id}/reviews`} >Reviews</Link>
               </span>
             </div>
           ))}

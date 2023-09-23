@@ -17,7 +17,7 @@ import bgImage6 from './styles/Screenshots/Login-TVBackground1.jpg';
 
 const replitBackendURL = process.env.REACT_APP_REPLIT_BACKEND_URL;
 
-const AuthForm = ({ onLogin }) => {
+const AuthForm = ({onLogin}) => {
   const [isSignup, setIsSignup] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -59,7 +59,7 @@ const AuthForm = ({ onLogin }) => {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
             });
-
+            toast.success(`User ${username} Created Successfully`, {autoClose: 2000, theme: 'dark'})
           if (res.data.error) {
             toast.error(res.data.error);
           } else {
@@ -147,9 +147,9 @@ const AuthForm = ({ onLogin }) => {
         )}
         <br/>
         {isLoading ? (<div className="lds-ripple"><div></div><div></div></div>) : (
-          <button className="authForm-button" type="submit" onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)} disabled={!areInputsValid()}>{isSignup ? 'Signup' : 'Login'}</button>
+          <button className="authForm-button" type="submit" disabled={!areInputsValid()}>{isSignup ? 'Signup' : 'Login'}</button>
         )}
-        <button className="authForm-button" type="button" onClick={() => setIsSignup(!isSignup)} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>{isSignup ? 'Switch to Login' : 'No account? Signup'}</button>
+        <button className="authForm-button" type="button" onClick={() => setIsSignup(!isSignup)}>{isSignup ? 'Switch to Login' : 'No account? Signup'}</button>
       </form>
     </div>
   );

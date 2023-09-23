@@ -22,7 +22,7 @@ const UpcomingMovies = () => {
               <div className="poster" key={movie.id}>
                 <span>
                   <h3>{movie.title}</h3>&nbsp;&nbsp;
-                  <button className="button-to-watchlist" onClick={() => {addMovieToWatchlist(movie); toast.success(`${movie.title} added to your watchlist.`, {autoClose: 2000, theme: 'dark'})}} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}><i className="fas fa-heart"></i></button>
+                  <button className="button-to-watchlist" onClick={() => {addMovieToWatchlist(movie); toast.success(`${movie.title} added to your watchlist.`, {autoClose: 2000, theme: 'dark'})}} ><i className="fas fa-heart"></i></button>
                   <br/>
                   {movie.poster_path ? (
                     <img src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} width="300px" alt={movie.title} />
@@ -39,9 +39,9 @@ const UpcomingMovies = () => {
                     <p>Genres: Unknown</p>
                   )}
                   <p>{movie.overview}</p>
-                  <Link to={`/movies/${movie.id}`} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>View Trailers</Link>
+                  <Link to={`/movies/${movie.id}`} >View Trailers</Link>
                   <br/>
-                  <Link to={`/movies/${movie.id}/reviews`} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>Reviews</Link>
+                  <Link to={`/movies/${movie.id}/reviews`} >Reviews</Link>
                 </span>
               </div>
             ))

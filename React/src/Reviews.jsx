@@ -59,8 +59,7 @@ function MediaReviews() {
     <div className="nav-container reviews media-reviews-container">
       <div>
         <h2>Read Reviews</h2>
-        <button onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)} onClick={toggleIsSearching}
-        >
+        <button onClick={toggleIsSearching}>
           {isSearching ? "TV Shows Reviews" : "Movies Reviews"}
         </button>
         <form onSubmit={searchMedia} style={{boxShadow: "none"}}>
@@ -77,7 +76,7 @@ function MediaReviews() {
                 <img src={`https://image.tmdb.org/t/p/original${media.poster_path}`} width='300px' alt={`Poster for ${media.title || media.name}`}/>
                 <h3>{media.title || media.name}</h3>
                 <p>{media.release_date || media.first_air_date}</p>
-                <button onClick={() => fetchReviews(media.id)} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>{activeId === media.id ? "Hide Reviews" : "Show Reviews"}</button>
+                <button onClick={() => fetchReviews(media.id)}>{activeId === media.id ? "Hide Reviews" : "Show Reviews"}</button>
                 {activeId === media.id &&
                   reviews[media.id] &&
                   reviews[media.id].length > 0 ? (

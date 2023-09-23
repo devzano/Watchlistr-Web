@@ -26,6 +26,14 @@ button {
   margin-top: 10px;
 }
 
+button:hover {
+  opacity: 0.5;
+}
+
+link:hover {
+  opacity: 0.5;
+}
+
 /* Mobile */
 @media (max-width: 480px) {
 

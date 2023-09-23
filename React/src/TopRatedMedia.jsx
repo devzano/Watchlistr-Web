@@ -19,13 +19,13 @@ const TopRatedMedia = () => {
           <section className="top-movies">
             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
               <h2>Top Rated Movies</h2>
-              <button onClick={toggleMedia} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>{showMedia ? (<i className="fas fa-tv"></i>) : (<i className="fas fa-film"></i>)}</button>
+              <button onClick={toggleMedia}>{showMedia ? (<i className="fas fa-tv"></i>) : (<i className="fas fa-film"></i>)}</button>
             </div>
             {topMovies.map((movie, index) => (
               <div className="poster" key={index}>
                 <span>
                   <h3>{movie.title}</h3>
-                  <button className="button-to-watchlist" onClick={() => {addMovieToWatchlist(movie); toast.success(`${movie.title} added to your watchlist.`, {autoClose: 2000, theme: 'dark'})}} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}><i className="fas fa-heart"></i></button>
+                  <button className="button-to-watchlist" onClick={() => {addMovieToWatchlist(movie); toast.success(`${movie.title} added to your watchlist.`, {autoClose: 2000, theme: 'dark'})}}><i className="fas fa-heart"></i></button>
                   {movie.poster_path ? (
                     <img src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} width='300px' alt={movie.title}/>
                     ) : (
@@ -40,9 +40,9 @@ const TopRatedMedia = () => {
                     <p>Genres: Unknown</p>
                   )}
                   <p>{movie.overview}</p>
-                  <Link to={`/movies/${movie.id}`} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>View Trailers</Link>
+                  <Link to={`/movies/${movie.id}`}>View Trailers</Link>
                   <br/>
-                  <Link to={`/movies/${movie.id}/reviews`} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>Reviews</Link>
+                  <Link to={`/movies/${movie.id}/reviews`}>Reviews</Link>
                 </span>
               </div>
             ))}
@@ -58,13 +58,13 @@ const TopRatedMedia = () => {
             <section className="top-tvshows">
               <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                 <h2>Top Rated TV Shows</h2>
-                <button onClick={toggleMedia} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>{showMedia ? (<i className="fas fa-tv"></i>) : (<i className="fas fa-film"></i>)}</button>
+                <button onClick={toggleMedia}>{showMedia ? (<i className="fas fa-tv"></i>) : (<i className="fas fa-film"></i>)}</button>
               </div>
               {topTvShows.map((tvShow, index) => (
                 <div className="poster" key={index}>
                   <span>
                     <h3>{tvShow.name}</h3>
-                    <button className="button-to-watchlist" onClick={() => {addTVShowToWatchlist(tvShow); toast.success(`${tvShow.name} added to your watchlist.`, {autoClose: 2000, theme: 'dark'})}} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}><i className="fas fa-heart"></i></button>
+                    <button className="button-to-watchlist" onClick={() => {addTVShowToWatchlist(tvShow); toast.success(`${tvShow.name} added to your watchlist.`, {autoClose: 2000, theme: 'dark'})}}><i className="fas fa-heart"></i></button>
                     {tvShow.poster_path ? (
                       <img src={`https://image.tmdb.org/t/p/original/${tvShow.poster_path}`} width='300px' alt={tvShow.name}/>
                       ) : (
@@ -85,9 +85,9 @@ const TopRatedMedia = () => {
                       <p>Genres: N/A</p>
                     )}
                     <p>{tvShow.overview}</p>
-                    <Link to={`/tv-shows/${tvShow.id}`} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>View Trailers</Link>
+                    <Link to={`/tv-shows/${tvShow.id}`}>View Trailers</Link>
                     <br/>
-                    <Link to={`/tv-shows/${tvShow.id}/reviews`} onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)}>Reviews</Link>
+                    <Link to={`/tv-shows/${tvShow.id}/reviews`}>Reviews</Link>
                   </span>
                 </div>
               ))}

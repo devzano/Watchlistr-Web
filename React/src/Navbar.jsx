@@ -53,7 +53,8 @@ const Navbar = (props) => {
         if (res.data.error) {
             toast.error(res.data.error);
         } else {
-            setShowDeleteConfirmation(false)
+            setShowDeleteConfirmation(false);
+
             handleLogout();
             navi('/');
         }

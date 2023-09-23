@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import ShowsContext from './Context';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const apiKey = process.env.REACT_APP_TMDB_API_KEY;
 const replitBackendURL = process.env.REACT_APP_REPLIT_BACKEND_URL;
 
-const ShowsProvider = ({ children }) => {
+const ShowsProvider = ({children}) => {
   const [loading, setLoading] = useState(true);
   const [tvShows, setTVShows] = useState([]);
   const [movies, setMovies] = useState([]);
@@ -93,7 +93,7 @@ const ShowsProvider = ({ children }) => {
         setPopTvShows(tvShowDetails);
         setLoading(false);
       } catch (error) {
-        toast.error('An error occurred while fetching Popular Movies and TV Shows. Please try again later.', {autoClose: 2000, theme: 'dark'});
+        // toast.error('An error occurred while fetching Popular Movies and TV Shows. Please try again later.', {autoClose: 2000, theme: 'dark'});
         setLoading(false);
       }
     };
@@ -135,7 +135,7 @@ const ShowsProvider = ({ children }) => {
         setTopTvShows(tvShowDetails);
         setLoading(false);
       } catch (error) {
-        toast.error('An error occurred while fetching Top Rated Movies and TV Shows. Please try again later.', {autoClose: 2000, theme: 'dark'});
+        // toast.error('An error occurred while fetching Top Rated Movies and TV Shows. Please try again later.', {autoClose: 2000, theme: 'dark'});
         setLoading(false);
       }
     };

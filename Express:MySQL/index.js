@@ -81,7 +81,6 @@ app.post('/signup', async (req, res) => {
     const user = results[0];
     res.send({
       message: `User ${username} Created Successfully`,
-
     });
   } catch (error) {
     console.error(error);

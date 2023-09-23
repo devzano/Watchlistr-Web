@@ -129,10 +129,10 @@ const AuthForm = ({ onLogin }) => {
       <form className={isSignup ? 'signup-form' : 'login-form'} onSubmit={handleSubmit}>
         <h1>Welcome to Watchlistr</h1>
         <label>Username:<input className="authForm-input" type="text" value={username} onChange={(e) => setUsername(e.target.value)}/></label><br/>
-        <label>Password:<input className="authForm-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)}/></label><br/>
+        <label>Password:<input className="authForm-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} style={{ borderColor: isSignup && confirmPassword ? isPasswordMatching ? 'seagreen' : 'crimson' : ''}}/></label><br/>
         {isSignup && (
           <>
-            <label>Confirm Password:<input className="authForm-input" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} style={{   borderColor: password ? (isPasswordMatching ? 'seagreen' : 'crimson') : '' }}/>
+            <label>Confirm Password:<input className="authForm-input" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} style={{ borderColor: password ? (isPasswordMatching ? 'seagreen' : 'crimson') : '' }}/>
             </label>
             <div className="password-requirements">
               <p>Your password must meet the following criteria:</p>

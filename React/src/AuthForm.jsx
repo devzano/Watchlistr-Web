@@ -114,7 +114,7 @@ const AuthForm = ({ onLogin }) => {
   const areInputsValid = () => {
     if (isSignup) {
       const isUsernameValid = username.trim().length >= 6;
-      const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&!])[A-Za-z\d@#$%^&!]*$/;
+      const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&!_+=\-|~*(){}[\]:;<>,.?\\/])[A-Za-z\d@#$%^&!_+=\-|~*(){}[\]:;<>,.?\\/]*$/;
       const isPasswordValid = password.match(passwordRegex);
       const doPasswordsMatch = password === confirmPassword;
       return isUsernameValid && isPasswordValid && doPasswordsMatch;
@@ -130,6 +130,17 @@ const AuthForm = ({ onLogin }) => {
         <label>Username:<input type="text" value={username} onChange={(e) => setUsername(e.target.value)}/></label><br/>
         <label>Password:<input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/></label><br/>
         {isSignup && (<label>Confirm Password:<input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} /></label>)}
+        {isSignup && (
+          <div className="password-requirements">
+          <p>Your password must meet the following criteria:</p>
+          <ul>
+            <li>At least 6 characters long</li>
+            <li>Contain at least one uppercase letter</li>
+            <li>Contain at least one digit</li>
+            <li>Contain at least one special character</li>
+          </ul>
+        </div>
+        )}
         <br/>
         {isLoading ? (<div className="lds-ripple"><div></div><div></div></div>) : (
           <button className="authForm-button" type="submit" onMouseOver={(e) => (e.target.style.opacity = 0.5)} onMouseOut={(e) => (e.target.style.opacity = 1)} disabled={!areInputsValid()}>{isSignup ? 'Signup' : 'Login'}</button>

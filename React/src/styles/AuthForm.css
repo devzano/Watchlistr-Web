@@ -73,22 +73,3 @@
   cursor: pointer;
   margin-top: 10px;
 }
-
-/* Add this to your CSS file */
-.input-error {
-  border: 2px solid crimson;
-  transition: border-color 0.3s ease;
-}
-
-.error-message {
-  color: crimson;
-  font-size: 12px;
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.input-error .error-message {
-  opacity: 1;
-  transform: translateY(0);
-}

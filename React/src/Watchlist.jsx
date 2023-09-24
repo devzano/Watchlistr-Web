@@ -30,7 +30,6 @@ function Watchlist() {
     }
   }
 
-
   const fetchTv = async () => {
     try {
       const formData = new URLSearchParams();
@@ -60,7 +59,7 @@ function Watchlist() {
   };
 
   const removeFromTVShows = (tvShowId) => {
-    setTVShows(tvShows.filter(tvShow => tvShow.tv_show_id !== tvShowId));
+    setTVShows(tvShows.filter(tvShow => tvShow.tvShowId !== tvShowId));
   };
 
   const removeMovieFromWatchlist = async (movie) => {
@@ -69,7 +68,7 @@ function Watchlist() {
     try {
       await deleteMovieFromWatchlist(userId, movie.movieId);
       removeFromMovies(movie.movieId);
-      toast.success(`Removed movie ${movie.title} from watchlist`, {autoClose: 2000, theme: 'dark'});
+      toast.success(`Removed the movie, ${movie.title} from your watchlist`, {autoClose: 2000, theme: 'dark'});
     } catch (error) {
       console.error(error);
       toast.error('Error Removing Movie From Watchlist', {autoClose: 2000, theme: 'dark'});
@@ -81,8 +80,10 @@ function Watchlist() {
     console.log('Removing media', tvShow.tvShowId, 'for user', userId);
     try {
       await deleteTVShowFromWatchlist(userId, tvShow.tvShowId);
-      removeFromTVShows(tvShow.tv_show_id);
-      toast.success(`Removed TV show ${tvShow.name} from watchlist`, {autoClose: 2000, theme: 'dark'});
+      console.log("Before removal:", tvShows);
+      removeFromTVShows(tvShow.tvShowId);
+      console.log("After removal:", tvShows);
+      toast.success(`Removed the TV Show, ${tvShow.name} from your watchlist`, {autoClose: 2000, theme: 'dark'});
     } catch (error) {
       console.error(error);
       toast.error('Error Removing TV Show From Watchlist', {autoClose: 2000, theme: 'dark'});
@@ -180,7 +181,7 @@ function Watchlist() {
                   {tvShow.posterPath ? (
                     <img src={`https://image.tmdb.org/t/p/original/${tvShow.posterPath}`} width='300px' key={tvShow.name} alt={tvShow.name} />
                   ) : (
-                    <img src='https://static.displate.com/857x1200/displate/2022-04-15/7422bfe15b3ea7b5933dffd896e9c7f9_46003a1b7353dc7b5a02949bd074432a.jpg' width='300px' alt={tvShow.title} />
+                    <img src='https://static.displate.com/857x1200/displate/2022-04-15/7422bfe15b3ea7b5933dffd896e9c7f9_46003a1b7353dc7b5a02949bd074432a.jpg' width='300px' alt={tvShow.name} />
                   )} <br />
                   <p>First & Last Air Dates: <br /> {tvShow.airDates}</p>
                   <p>Runtime: {tvShow.runtime}mins</p>

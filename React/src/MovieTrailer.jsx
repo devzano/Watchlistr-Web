@@ -56,22 +56,30 @@ function MovieTrailers() {
           title={trailer.name}
           allowFullScreen
         ></iframe>
-        {/* Add the embedded video URL for each trailer */}
-        <iframe
-          style={{ border: "none" }}
-          width="560"
-          height="315"
-          src={`https://vidsrc.xyz/embed/movie?tmdb=${id}&sub_url=https%3A%2F%2Fvidsrc.me%2Fsample.srt`}
-          title={`Embedded ${trailer.name}`}
-          allowFullScreen
-        ></iframe>
       </div>
     ));
   };
 
+  const embeddedVideoUrl = `https://vidsrc.xyz/embed/movie?tmdb=${id}&sub_url=https%3A%2F%2Fvidsrc.me%2Fsample.srt`;
+
   return (
     <div className="nav-container">
       {movieTitle ? <h1>{movieTitle} Trailer(s)</h1> : <h1>Loading...</h1>}
+
+      {/* Display the embedded video at the top */}
+      <div>
+        <h3>Embedded Video</h3>
+        <iframe
+          style={{ border: "none" }}
+          width="560"
+          height="315"
+          src={embeddedVideoUrl}
+          title="Embedded Video"
+          allowFullScreen
+        ></iframe>
+      </div>
+
+      {/* Display the YouTube trailers */}
       {renderTrailers()}
       <div>
         {Array.from({ length: totalPages }).map((_, index) => (

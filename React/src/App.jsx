@@ -11,6 +11,7 @@ import TVShowTrailers from './TVShowTrailer.jsx';
 import MovieReviews from './MovieReviews.jsx';
 import TVShowReviews from './TVShowReviews.jsx';
 import Reviews from './Reviews.jsx';
+import MovieEmbed from './MovieEmbed.jsx';
 import UpcomingMovies from './UpcomingMovies.jsx';
 import AiringToday from './AiringToday.jsx';
 import ShowsProvider from './TMDBProvider';
@@ -71,6 +72,7 @@ function App() {
           <Route path="/airing-today" element={<AiringToday/>}/>
           <Route path="/upcoming-movies" element={<UpcomingMovies/>}/>
           <Route path="/media-reviews" element={<Reviews/>}/>
+          <Route path="/watch/movies/:id/embed" element={<MovieEmbed />}/>
           <Route path="/watchlist" element={<Watchlist userId={userId} onLogin={handleLogin}/>}/>
         </Routes>
         </ShowsProvider>

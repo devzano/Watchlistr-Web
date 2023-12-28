@@ -24,9 +24,7 @@ function MovieEmbed() {
       const url = `https://vidsrc.xyz/embed/movie?tmdb=${id}`;
       try {
         const { data } = await axios.get(url);
-        if (data.results.length > 0) {
-          setMovie(data.results[0]);
-        }
+        setMovie(data.results[0]);
       } catch (error) {
         console.error(error);
       }

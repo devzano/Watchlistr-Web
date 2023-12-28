@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import {useParams} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const apiKey = process.env.REACT_APP_TMDB_API_KEY;
 
@@ -24,9 +24,7 @@ function MovieTrailers() {
       const url = `https://vidsrc.xyz/embed/movie?tmdb=${id}`;
       try {
         const { data } = await axios.get(url);
-        if (data.results.length > 0) {
-          setMovie(data.results[0]);
-        }
+        setMovie(data.results[0]);
       } catch (error) {
         console.error(error);
       }
@@ -55,6 +53,4 @@ function MovieTrailers() {
     </div>
   );
 }
-
-
 export default MovieTrailers;

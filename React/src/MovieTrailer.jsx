@@ -5,10 +5,11 @@ import {useParams} from 'react-router-dom';
 const apiKey = process.env.REACT_APP_TMDB_API_KEY;
 
 function MovieTrailers() {
-  const {id} = useParams();
+  const { id } = useParams();
   const [movieTitle, setMovieTitle] = useState('');
   const [trailers, setTrailers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [videoUrl, setVideoUrl] = useState(''); // Add videoUrl state
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -31,8 +32,19 @@ function MovieTrailers() {
       }
     };
 
+    const fetchVideoUrl = async () => {
+      const videoUrlEndpoint = `https://vidsrc.xyz/embed/movie/${id}`;
+      try {
+        const { data } = await axios.get(videoUrlEndpoint);
+        setVideoUrl(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
     fetchMovieDetails();
     fetchTrailers(currentPage);
+    fetchVideoUrl();
   }, [id, currentPage]);
 
   const totalPages = Math.ceil(trailers.length / 10);
@@ -62,6 +74,16 @@ function MovieTrailers() {
 
   return (
     <div className="nav-container">
+      {videoUrl && (
+        <iframe
+          style={{ border: "none" }}
+          width="560"
+          height="315"
+          src={videoUrl} // Set the src attribute to videoUrl
+          title="Movie Video"
+          allowFullScreen
+        ></iframe>
+      )}
       {movieTitle ? <h1>{movieTitle} Trailer(s)</h1> : <h1>Loading...</h1>}
       {renderTrailers()}
       <div>

@@ -33,7 +33,7 @@ function MovieTrailers() {
     };
 
     const fetchEmbedUrl = async () => {
-      const embedUrlEndpoint = `https://vidsrc.xyz/embed/movie?tmdb=${id}`;
+      const embedUrlEndpoint = `https://vidsrc.xyz/embed/movie?tmdb=385687`;
       try {
         const response = await axios.get(embedUrlEndpoint);
         setEmbedUrl(response.data);

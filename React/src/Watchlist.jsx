@@ -12,12 +12,7 @@ function Watchlist() {
   const [tvShows, setTVShows] = useState([]);
   const [showMedia, isShowingMedia] = useState(true);
   const username = sessionStorage.getItem('username');
-  const generateMovieEmbedURL = (movie) => {
-    return `https://vidsrc.xyz/embed/movie?tmdb=${movie.id}`;
-  };
-  const generateTVShowEmbedURL = (tvShow) => {
-    return `https://vidsrc.xyz/embed/tv?tmdb=${tvShow.id}`;
-  };
+
   const fetchMovies = async () => {
     try {
       const formData = new URLSearchParams();
@@ -166,9 +161,6 @@ function Watchlist() {
                   <p>Release Date: {movie.releaseDate}</p>
                   <p>Runtime: {movie.runtime}mins</p>
                   <p>{movie.overview}</p>
-                  <a href={generateMovieEmbedURL(movie)} target="_blank" rel="noopener noreferrer">
-                    <i className="fas fa-play"></i> Watch Movie
-                  </a>
                   <Link to={`/movies/${movie.movieId}`}>View Trailers</Link>
                   <Link to={`/movies/${movie.movieId}/reviews`}>Reviews</Link>
                 </span>
@@ -194,9 +186,6 @@ function Watchlist() {
                   <p>First & Last Air Dates: <br /> {tvShow.airDates}</p>
                   <p>Runtime: {tvShow.runtime}mins</p>
                   <p>{tvShow.overview}</p>
-                  <a href={generateTVShowEmbedURL(tvShow)} target="_blank" rel="noopener noreferrer">
-                    <i className="fas fa-play"></i> Watch TV Show
-                  </a>
                   <Link to={`/tv-shows/${tvShow.tvShowId}`}>View Trailers</Link>
                   <Link to={`/tv-shows/${tvShow.tvShowId}/reviews`}>Reviews</Link>
                 </span>

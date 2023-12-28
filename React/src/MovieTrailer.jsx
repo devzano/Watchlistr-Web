@@ -60,14 +60,14 @@ function MovieTrailers() {
     return trailers.slice(startIndex, endIndex).map((trailer) => trailer.key && (
       <div key={trailer.id}>
         <h3>{trailer.name}</h3>
-        <iframe
-          style={{ border: "none" }}
+        <video
           width="560"
           height="315"
-          src={`https://www.youtube.com/embed/${trailer.key}`}
-          title={trailer.name}
-          allowFullScreen
-        ></iframe>
+          controls
+        >
+          <source src={embedUrl} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
       </div>
     ));
   };
@@ -75,12 +75,6 @@ function MovieTrailers() {
   return (
     <div className="nav-container">
       {movieTitle ? <h1>{movieTitle} Trailer(s)</h1> : <h1>Loading...</h1>}
-      <iframe
-        style={{ border: "none", width: "560px", height: "315px" }}
-        src={embedUrl}
-        title={movieTitle}
-        allowFullScreen
-      ></iframe>
       {renderTrailers()}
       <div>
         {Array.from({ length: totalPages }).map((_, index) => (

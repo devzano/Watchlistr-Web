@@ -1,44 +1,59 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
-const MovieEmbed = () => {
-  const { id } = useParams(); // Get the movie ID from the URL
+const apiKey = process.env.REACT_APP_TMDB_API_KEY;
+
+function MovieEmbed() {
+  const { id } = useParams();
+  const [movieTitle, setMovieTitle] = useState('');
   const [movie, setMovie] = useState(null);
-  const apiKey = process.env.REACT_APP_TMDB_API_KEY;
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
         const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`;
         const response = await axios.get(url);
-        setMovie(response.data);
+        setMovieTitle(response.data.title);
       } catch (error) {
-        console.error('Error fetching movie details', error);
+        console.error(error);
+      }
+    };
+
+    const fetchMovie = async () => {
+      const url = `https://vidsrc.xyz/embed/movie?tmdb=${id}`;
+      try {
+        const { data } = await axios.get(url);
+        if (data.results.length > 0) {
+          setMovie(data.results[0]);
+        }
+      } catch (error) {
+        console.error(error);
       }
     };
 
     fetchMovieDetails();
-  }, [id, apiKey]);
-
-  if (!movie) {
-    return <div>Loading...</div>;
-  }
+    fetchMovie();
+  }, [id]);
 
   return (
-    <div className="movie-embed-container">
-      <h2>{movie.title}</h2>
-      <iframe
-        src={`https://vidsrc.xyz/embed/movie?tmdb=${id}`}
-        width="560"
-        height="315"
-        frameBorder="0"
-        allowFullScreen
-        title={movie.title}
-      ></iframe>
-      {/* Additional movie details can be added here */}
+    <div className="nav-container">
+      {movieTitle ? <h1>{movieTitle} movie</h1> : <h1>Loading...</h1>}
+      {movie && (
+        <div key={movie.id}>
+          <h3>{movie.name}</h3>
+          <iframe
+            style={{ border: "none" }}
+            width="560"
+            height="315"
+            src={`https://vidsrc.xyz/embed/movie?tmdb=${movie.id}`}
+            title={movie.name}
+            allowFullScreen
+          ></iframe>
+        </div>
+      )}
     </div>
   );
-};
+}
 
 export default MovieEmbed;

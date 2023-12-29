@@ -4,34 +4,34 @@ import {useParams} from 'react-router-dom';
 
 const apiKey = process.env.REACT_APP_TMDB_API_KEY;
 
-function TVShowTrailers() {
+function MovieMedia() {
   const {id} = useParams();
-  const [tvShowTitle, setTVShowTitle] = useState('');
+  const [movieTitle, setMovieTitle] = useState('');
   const [trailers, setTrailers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    const fetchTVShowDetails = async () => {
+    const fetchMovieDetails = async () => {
       try {
-        const url = `https://api.themoviedb.org/3/tv/${id}?api_key=${apiKey}&language=en-US`;
+        const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`;
         const response = await axios.get(url);
-        setTVShowTitle(response.data.name);
-      } catch (err) {
-        console.error(err);
+        setMovieTitle(response.data.title);
+      } catch (error) {
+        console.error(error);
       }
     };
 
     const fetchTrailers = async (page) => {
-      const url = `https://api.themoviedb.org/3/tv/${id}/videos?api_key=${apiKey}&page=${page}`;
+      const url = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${apiKey}&page=${page}`;
       try {
-        const {data} = await axios.get(url);
+        const { data } = await axios.get(url);
         setTrailers(data.results);
-      } catch (err) {
-        console.error(err);
+      } catch (error) {
+        console.error(error);
       }
     };
 
-    fetchTVShowDetails();
+    fetchMovieDetails();
     fetchTrailers(currentPage);
   }, [id, currentPage]);
 
@@ -49,7 +49,7 @@ function TVShowTrailers() {
       <div key={trailer.id}>
         <h3>{trailer.name}</h3>
         <iframe
-          style={{border: "none"}}
+          style={{ border: "none" }}
           width="560"
           height="315"
           src={`https://www.youtube.com/embed/${trailer.key}`}
@@ -60,12 +60,28 @@ function TVShowTrailers() {
     ));
   };
 
+  const movieURL = `https://vidsrc.xyz/embed/movie?tmdb=${id}`;
+
   return (
     <div className="nav-container">
-      {tvShowTitle ? <h1>{tvShowTitle} Trailer(s)</h1> : <h1>Loading...</h1>}
+      {movieTitle ? <h1>{movieTitle} Trailer(s)</h1> : <h1>Loading...</h1>}
+
+      <div>
+        <h3>{movieTitle}</h3>
+        <iframe
+          style={{border: "none"}}
+          width="560"
+          height="315"
+          src={movieURL}
+          title={movieTitle}
+          allowFullScreen
+        ></iframe>
+      </div>
+
       {renderTrailers()}
       <div>
-        {Array.from({length: totalPages}).map((_, index) => (
+      <h3>{movieTitle} Trailer(s)</h3>
+        {Array.from({ length: totalPages }).map((_, index) => (
           <button key={index} onClick={() => handlePageClick(index + 1)}>
             {index + 1}
           </button>
@@ -75,4 +91,4 @@ function TVShowTrailers() {
   );
 }
 
-export default TVShowTrailers;
+export default MovieMedia;

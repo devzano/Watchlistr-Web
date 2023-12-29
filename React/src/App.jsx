@@ -6,8 +6,8 @@ import Watchlist from './Watchlist.jsx'
 import MediaSearch from './MediaSearch.jsx';
 import PopularMedia from './PopularMedia.jsx';
 import TopRatedMedia from './TopRatedMedia.jsx';
-import MovieTrailers from './MovieTrailer.jsx';
-import TVShowTrailers from './TVShowTrailer.jsx';
+import MovieMedia from './MovieMedia.jsx';
+import TVShowMedia from './TVShowMedia.jsx';
 import MovieReviews from './MovieReviews.jsx';
 import TVShowReviews from './TVShowReviews.jsx';
 import Reviews from './Reviews.jsx';
@@ -62,8 +62,8 @@ function App() {
         <Routes>
           <Route path="/" element={<AuthForm onLogin={handleLogin} isSignup/>}/>
           <Route path="/media-search" element={<MediaSearch/>}/>
-          <Route path="/movies/:id" element={<MovieTrailers/>}/>
-          <Route path="/tv-shows/:id" element={<TVShowTrailers/>}/>
+          <Route path="/movies/:id" element={<MovieMedia/>}/>
+          <Route path="/tv-shows/:id" element={<TVShowMedia/>}/>
           <Route path="/movies/:id/reviews" element={<MovieReviews/>}/>
           <Route path="/tv-shows/:id/reviews" element={<TVShowReviews/>}/>
           <Route path="/top-rated-media" element={<TopRatedMedia/>}/>

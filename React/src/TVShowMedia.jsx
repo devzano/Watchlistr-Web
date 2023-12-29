@@ -1,37 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 
 const apiKey = process.env.REACT_APP_TMDB_API_KEY;
 
-function MovieTrailers() {
-  const { id } = useParams();
-  const [movieTitle, setMovieTitle] = useState('');
+function TVShowMedia() {
+  const {id} = useParams();
+  const [tvShowTitle, setTVShowTitle] = useState('');
   const [trailers, setTrailers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    const fetchMovieDetails = async () => {
+    const fetchTVShowDetails = async () => {
       try {
-        const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`;
+        const url = `https://api.themoviedb.org/3/tv/${id}?api_key=${apiKey}&language=en-US`;
         const response = await axios.get(url);
-        setMovieTitle(response.data.title);
-      } catch (error) {
-        console.error(error);
+        setTVShowTitle(response.data.name);
+      } catch (err) {
+        console.error(err);
       }
     };
 
     const fetchTrailers = async (page) => {
-      const url = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${apiKey}&page=${page}`;
+      const url = `https://api.themoviedb.org/3/tv/${id}/videos?api_key=${apiKey}&page=${page}`;
       try {
-        const { data } = await axios.get(url);
+        const {data} = await axios.get(url);
         setTrailers(data.results);
-      } catch (error) {
-        console.error(error);
+      } catch (err) {
+        console.error(err);
       }
     };
 
-    fetchMovieDetails();
+    fetchTVShowDetails();
     fetchTrailers(currentPage);
   }, [id, currentPage]);
 
@@ -49,7 +49,7 @@ function MovieTrailers() {
       <div key={trailer.id}>
         <h3>{trailer.name}</h3>
         <iframe
-          style={{ border: "none" }}
+          style={{border: "none"}}
           width="560"
           height="315"
           src={`https://www.youtube.com/embed/${trailer.key}`}
@@ -60,29 +60,28 @@ function MovieTrailers() {
     ));
   };
 
-  const embeddedVideoUrl = `https://vidsrc.xyz/embed/movie?tmdb=${id}&sub_url=https%3A%2F%2Fvidsrc.me%2Fsample.srt`;
+  const tvURL = `https://vidsrc.xyz/embed/tv?tmdb=${id}`;
 
   return (
     <div className="nav-container">
-      {movieTitle ? <h1>{movieTitle} Trailer(s)</h1> : <h1>Loading...</h1>}
+      {tvShowTitle ? <h1>{tvShowTitle} Trailer(s)</h1> : <h1>Loading...</h1>}
 
-      {/* Display the embedded video at the top */}
       <div>
-        <h3>Embedded Video</h3>
+        <h3>{tvShowTitle}</h3>
         <iframe
-          style={{ border: "none" }}
+          style={{border: "none"}}
           width="560"
           height="315"
-          src={embeddedVideoUrl}
-          title="Embedded Video"
+          src={tvURL}
+          title={tvShowTitle}
           allowFullScreen
         ></iframe>
       </div>
 
-      {/* Display the YouTube trailers */}
       {renderTrailers()}
       <div>
-        {Array.from({ length: totalPages }).map((_, index) => (
+        <h3>{tvShowTitle} Trailer(s)</h3>
+        {Array.from({length: totalPages}).map((_, index) => (
           <button key={index} onClick={() => handlePageClick(index + 1)}>
             {index + 1}
           </button>
@@ -92,4 +91,4 @@ function MovieTrailers() {
   );
 }
 
-export default MovieTrailers;
+export default TVShowMedia;

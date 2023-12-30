@@ -50,7 +50,7 @@ function TVShowMedia() {
         <h3>{trailer.name}</h3>
         <iframe
           style={{border: "none"}}
-          width="560"
+          width="100%"
           height="315"
           src={`https://www.youtube.com/embed/${trailer.key}`}
           title={trailer.name}
@@ -70,7 +70,7 @@ function TVShowMedia() {
         <h3>{tvShowTitle}</h3>
         <iframe
           style={{border: "none"}}
-          width="560"
+          width="100%"
           height="315"
           src={tvURL}
           title={tvShowTitle}

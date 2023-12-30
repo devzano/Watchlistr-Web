@@ -64,7 +64,7 @@ function MovieMedia() {
 
   return (
     <div className="nav-container">
-      {movieTitle ? <h1>{movieTitle} Trailer(s)</h1> : <h1>Loading...</h1>}
+      <h1>{movieTitle}</h1> : <h1>Loading...</h1>
 
       <div>
         <h3>{movieTitle}</h3>

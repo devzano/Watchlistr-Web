@@ -5,6 +5,7 @@ import {useParams} from 'react-router-dom';
 const apiKey = process.env.REACT_APP_TMDB_API_KEY;
 
 function TVShowMedia() {
+  const isMobile = window.innerWidth <= 768;
   const {id} = useParams();
   const [tvShowTitle, setTVShowTitle] = useState('');
   const [trailers, setTrailers] = useState([]);
@@ -50,7 +51,7 @@ function TVShowMedia() {
         <h3>{trailer.name}</h3>
         <iframe
           style={{border: "none"}}
-          width="100%"
+          width={isMobile ? '80%' : '560px'} // Set width conditionally
           height="315"
           src={`https://www.youtube.com/embed/${trailer.key}`}
           title={trailer.name}
@@ -70,7 +71,7 @@ function TVShowMedia() {
         <h3>{tvShowTitle}</h3>
         <iframe
           style={{border: "none"}}
-          width="100%"
+          width={isMobile ? '80%' : '560px'} // Set width conditionally
           height="315"
           src={tvURL}
           title={tvShowTitle}

@@ -9,7 +9,6 @@ function TVShowMedia() {
   const [tvShowTitle, setTVShowTitle] = useState('');
   const [trailers, setTrailers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchTVShowDetails = async () => {
@@ -17,7 +16,6 @@ function TVShowMedia() {
         const url = `https://api.themoviedb.org/3/tv/${id}?api_key=${apiKey}&language=en-US`;
         const response = await axios.get(url);
         setTVShowTitle(response.data.name);
-        setIsLoading(false);
       } catch (err) {
         console.error(err);
       }
@@ -28,7 +26,6 @@ function TVShowMedia() {
       try {
         const {data} = await axios.get(url);
         setTrailers(data.results);
-        setIsLoading(false);
       } catch (err) {
         console.error(err);
       }
@@ -67,7 +64,7 @@ function TVShowMedia() {
 
   return (
     <div className="nav-container">
-      {isLoading ? <h1>Loading...</h1> : <h1>{movieTitle}</h1>}
+      {tvShowTitle ? <h1>{tvShowTitle}</h1> : <h1>Loading...</h1>}
 
       <div>
         <h3>{tvShowTitle}</h3>

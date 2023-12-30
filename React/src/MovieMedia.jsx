@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 
 const apiKey = process.env.REACT_APP_TMDB_API_KEY;
 
 function MovieMedia() {
-  const { id } = useParams();
+  const {id} = useParams();
   const [movieTitle, setMovieTitle] = useState('');
   const [trailers, setTrailers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -17,7 +16,6 @@ function MovieMedia() {
         const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`;
         const response = await axios.get(url);
         setMovieTitle(response.data.title);
-        setIsLoading(false);
       } catch (error) {
         console.error(error);
       }
@@ -28,7 +26,6 @@ function MovieMedia() {
       try {
         const { data } = await axios.get(url);
         setTrailers(data.results);
-        setIsLoading(false);
       } catch (error) {
         console.error(error);
       }
@@ -36,7 +33,7 @@ function MovieMedia() {
 
     fetchMovieDetails();
     fetchTrailers(currentPage);
-  }, [id, currentPage, movieTitle]); // Add movieTitle as a dependency
+  }, [id, currentPage]);
 
   const totalPages = Math.ceil(trailers.length / 10);
 
@@ -67,12 +64,12 @@ function MovieMedia() {
 
   return (
     <div className="nav-container">
-      {isLoading ? <h1>Loading...</h1> : <h1>{movieTitle}</h1>}
+      {movieTitle ? <h1>{movieTitle} Trailer(s)</h1> : <h1>Loading...</h1>}
 
       <div>
         <h3>{movieTitle}</h3>
         <iframe
-          style={{ border: "none" }}
+          style={{border: "none"}}
           width="560"
           height="315"
           src={movieURL}
@@ -83,7 +80,7 @@ function MovieMedia() {
 
       {renderTrailers()}
       <div>
-        <h3>{movieTitle} Trailer(s)</h3>
+      <h3>{movieTitle} Trailer(s)</h3>
         {Array.from({ length: totalPages }).map((_, index) => (
           <button key={index} onClick={() => handlePageClick(index + 1)}>
             {index + 1}

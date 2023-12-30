@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 
 const apiKey = process.env.REACT_APP_TMDB_API_KEY;
 
-function MovieTrailers() {
-  const { id } = useParams();
+function MovieMedia() {
+  const {id} = useParams();
   const [movieTitle, setMovieTitle] = useState('');
   const [trailers, setTrailers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -63,28 +63,27 @@ function MovieTrailers() {
     ));
   };
 
-  const embeddedVideoUrl = `https://vidsrc.xyz/embed/movie?tmdb=${id}`;
+  const movieURL = `https://vidsrc.xyz/embed/movie?tmdb=${id}`;
 
   return (
     <div className="nav-container">
       {isLoading ? <h1>Loading...</h1> : <h1>{movieTitle}</h1>}
 
       <div>
-        <h3>Embedded Video</h3>
+        <h3>{movieTitle}</h3>
         <iframe
-          style={{ border: "none" }}
+          style={{border: "none"}}
           width="560"
           height="315"
-          src={embeddedVideoUrl}
-          title="Embedded Video"
+          src={movieURL}
+          title={movieTitle}
           allowFullScreen
         ></iframe>
       </div>
 
       {renderTrailers()}
-
       <div>
-        <h3>{movieTitle} Trailer(s)</h3>
+      <h3>{movieTitle} Trailer(s)</h3>
         {Array.from({ length: totalPages }).map((_, index) => (
           <button key={index} onClick={() => handlePageClick(index + 1)}>
             {index + 1}
@@ -95,4 +94,4 @@ function MovieTrailers() {
   );
 }
 
-export default MovieTrailers;
+export default MovieMedia;

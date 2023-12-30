@@ -51,7 +51,7 @@ function MovieMedia() {
         <h3>{trailer.name}</h3>
         <iframe
           style={{ border: "none" }}
-          width={isMobile ? '95%' : '560px'}
+          width={isMobile ? '100%' : '560px'}
           height="315"
           src={`https://www.youtube.com/embed/${trailer.key}`}
           title={trailer.name}
@@ -71,7 +71,7 @@ function MovieMedia() {
         <h3>{movieTitle}</h3>
         <iframe
           style={{border: "none"}}
-          width={isMobile ? '95%' : '560px'}
+          width={isMobile ? '100%' : '560px'}
           height="315"
           src={movieURL}
           title={movieTitle}

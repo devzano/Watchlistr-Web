@@ -157,11 +157,12 @@ function Watchlist() {
                     <img src={`https://image.tmdb.org/t/p/original/${movie.posterPath}`} width='300px' key={movie.title} alt={movie.title} />
                   ) : (
                     <img src='https://static.displate.com/857x1200/displate/2022-04-15/7422bfe15b3ea7b5933dffd896e9c7f9_46003a1b7353dc7b5a02949bd074432a.jpg' width='300px' alt={movie.title} />
-                  )} <br />
+                  )} <br/>
                   <p>Release Date: {movie.releaseDate}</p>
                   <p>Runtime: {movie.runtime}mins</p>
                   <p>{movie.overview}</p>
-                  <Link to={`/movies/${movie.movieId}`}>View Trailers</Link>
+                  <Link to={`/movies/${movie.movieId}`}>View Media</Link>
+                  <br/>
                   <Link to={`/movies/${movie.movieId}/reviews`}>Reviews</Link>
                 </span>
               </div>

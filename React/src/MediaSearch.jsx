@@ -167,7 +167,7 @@ const MediaSearch = () => {
               <p>Runtime: {movie.runtime}mins</p>
               <p>Genres: {movie.genres.map((genre) => genre.name).join(', ')}</p>
               <p>{movie.overview}</p>
-              <Link to={`/movies/${movie.id}`}>View Trailers</Link>
+              <Link to={`/movies/${movie.id}`}>View Media</Link>
               <br/>
               <Link to={`/movies/${movie.id}/reviews`}>Reviews</Link>
             </span>

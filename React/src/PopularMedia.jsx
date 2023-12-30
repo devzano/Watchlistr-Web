@@ -41,7 +41,7 @@ const PopularMedia = () => {
                     <p>Genres: N/A</p>
                   )}
                   <p>{movie.overview}</p>
-                  <Link to={`/movies/${movie.id}`}>View Trailers</Link>
+                  <Link to={`/movies/${movie.id}`}>View Media</Link>
                   <br/>
                   <Link to={`/movies/${movie.id}/reviews`}>Reviews</Link>
                 </span>

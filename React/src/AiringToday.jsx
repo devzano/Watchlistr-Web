@@ -39,7 +39,7 @@ const AiringToday = () => {
                   <p>Genres: N/A</p>
                 )}
                 <p>{tvShow.overview}</p>
-                <Link to={`/tv-shows/${tvShow.id}`} >View Trailers</Link>
+                <Link to={`/tv-shows/${tvShow.id}`} >View Media</Link>
                 <br/>
                 <Link to={`/tv-shows/${tvShow.id}/reviews`} >Reviews</Link>
               </span>

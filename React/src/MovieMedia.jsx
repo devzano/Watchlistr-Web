@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import {useParams} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const apiKey = process.env.REACT_APP_TMDB_API_KEY;
 
 function MovieMedia() {
-  const {id} = useParams();
+  const { id } = useParams();
   const [movieTitle, setMovieTitle] = useState('');
   const [trailers, setTrailers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -36,7 +36,7 @@ function MovieMedia() {
 
     fetchMovieDetails();
     fetchTrailers(currentPage);
-  }, [id, currentPage]);
+  }, [id, currentPage, movieTitle]); // Add movieTitle as a dependency
 
   const totalPages = Math.ceil(trailers.length / 10);
 
@@ -72,7 +72,7 @@ function MovieMedia() {
       <div>
         <h3>{movieTitle}</h3>
         <iframe
-          style={{border: "none"}}
+          style={{ border: "none" }}
           width="560"
           height="315"
           src={movieURL}
@@ -83,7 +83,7 @@ function MovieMedia() {
 
       {renderTrailers()}
       <div>
-      <h3>{movieTitle} Trailer(s)</h3>
+        <h3>{movieTitle} Trailer(s)</h3>
         {Array.from({ length: totalPages }).map((_, index) => (
           <button key={index} onClick={() => handlePageClick(index + 1)}>
             {index + 1}

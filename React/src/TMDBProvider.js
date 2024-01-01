@@ -20,7 +20,6 @@ const ShowsProvider = ({children}) => {
   const delay = (ms) => new Promise(res => setTimeout(res, ms));
 
   const fetchAUMedia = useCallback(async () => {
-    setLoading(true);
     const airingToday = [];
     let page = 1;
     const MAX_PAGES = 5;
@@ -70,7 +69,6 @@ const ShowsProvider = ({children}) => {
 
     setTVShows(airingTodayDetails);
     setMovies(upcomingMoviesDetails);
-    setLoading(false);
   }, []);
 
 useEffect(() => {

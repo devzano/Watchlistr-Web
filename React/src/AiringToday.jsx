@@ -34,9 +34,11 @@ const AiringToday = () => {
                       <p className="runtime">Runtime: {tvShow.episode_run_time ? tvShow.episode_run_time + ' mins' : 'N/A'}</p>
                       <p className="genres">Genres: {tvShow.genres ? tvShow.genres.map((genre) => genre.name).join(', ') : 'N/A'}</p>
                       <p className="overview">{tvShow.overview}</p>
-                      <Link to={`/tv-shows/${tvShow.id}`} className="view-media-link">View Media</Link>
-                      <Link to={`/tv-shows/${tvShow.id}/episodes`} className="episodes-link">View Episodes</Link>
-                      <Link to={`/tv-shows/${tvShow.id}/reviews`} className="reviews-link">Reviews</Link>
+                      <Link className="view-media-link" to={`/tv-shows/${tvShow.id}`}>View Media</Link>
+                      <br />
+                      <Link to={`/tv-shows/${tvShow.id}/episodes`} className="view-media-link">View Episodes</Link>
+                      <br />
+                      <Link className="reviews-link" to={`/tv-shows/${tvShow.id}/reviews`}>Reviews</Link>
                     </div>
                   </div>
                 ))

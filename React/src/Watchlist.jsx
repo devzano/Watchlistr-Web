@@ -187,6 +187,7 @@ function Watchlist() {
                   <p>Runtime: {tvShow.runtime}mins</p>
                   <p>{tvShow.overview}</p>
                   <Link className="view-media-link" to={`/tv-shows/${tvShow.tvShowId}`}>View Media</Link>
+                  <Link className="view-media-link"to={`/tv-shows/${tvShow.id}/episodes`}>View Episodes</Link>
                   <Link className="reviews-link" to={`/tv-shows/${tvShow.tvShowId}/reviews`}>Reviews</Link>
                 </div>
               </div>

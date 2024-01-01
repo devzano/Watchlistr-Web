@@ -19,10 +19,10 @@ const PopularMedia = () => {
             ) : (
               <section className="media-header">
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <h2 className="header">Popular Movies</h2>
-                <button className="toggle-button" onClick={toggleMedia}>
-                  {showMedia ? <i className="fas fa-tv"></i> : <i className="fas fa-film"></i>}
-                </button>
+                  <h2 className="header">Popular Movies</h2>
+                  <button className="toggle-button" onClick={toggleMedia}>
+                    {showMedia ? <i className="fas fa-tv"></i> : <i className="fas fa-film"></i>}
+                  </button>
                 </div>
                 <div className="pop-movies media-grid-container">
                   {popMovies.map((movie, index) => (
@@ -44,6 +44,7 @@ const PopularMedia = () => {
                         <p className="genres">Genres: {movie.genres ? movie.genres.map((genre) => genre.name).join(', ') : 'N/A'}</p>
                         <p className="overview">{movie.overview}</p>
                         <Link to={`/movies/${movie.id}`} className="view-media-link">View Media</Link>
+                        <br />
                         <Link to={`/movies/${movie.id}/reviews`} className="reviews-link">Reviews</Link>
                       </div>
                     </div>
@@ -62,10 +63,10 @@ const PopularMedia = () => {
             ) : (
               <section className="media-header">
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <h2 className="header">Popular TV Shows</h2>
-                <button className="toggle-button" onClick={toggleMedia}>
-                  {showMedia ? <i className="fas fa-tv"></i> : <i className="fas fa-film"></i>}
-                </button>
+                  <h2 className="header">Popular TV Shows</h2>
+                  <button className="toggle-button" onClick={toggleMedia}>
+                    {showMedia ? <i className="fas fa-tv"></i> : <i className="fas fa-film"></i>}
+                  </button>
                 </div>
                 <div className="pop-tvshows media-grid-container">
                   {popTvShows.map((tvShow, index) => (
@@ -80,8 +81,11 @@ const PopularMedia = () => {
                         <p className="runtime">Runtime: {tvShow.episode_run_time[0] ? tvShow.episode_run_time[0] + ' mins' : 'N/A'}</p>
                         <p className="genres">Genres: {tvShow.genres ? tvShow.genres.map((genre) => genre.name).join(', ') : 'N/A'}</p>
                         <p className="overview">{tvShow.overview}</p>
-                        <Link to={`/tv-shows/${tvShow.id}`} className="view-media-link">View Media</Link>
-                        <Link to={`/tv-shows/${tvShow.id}/reviews`} className="reviews-link">Reviews</Link>
+                        <Link className="view-media-link" to={`/tv-shows/${tvShow.id}`}>View Media</Link>
+                        <br />
+                        <Link to={`/tv-shows/${tvShow.id}/episodes`} className="view-media-link">View Episodes</Link>
+                        <br />
+                        <Link className="reviews-link" to={`/tv-shows/${tvShow.id}/reviews`}>Reviews</Link>
                       </div>
                     </div>
                   ))}

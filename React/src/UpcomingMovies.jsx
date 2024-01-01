@@ -33,6 +33,7 @@ const UpcomingMovies = () => {
                     <p className="genres">Genres: {movie.genres ? movie.genres.map((genre) => genre.name).join(', ') : 'N/A'}</p>
                     <p className="overview">{movie.overview}</p>
                     <Link to={`/movies/${movie.id}`} className="view-media-link">View Media</Link>
+                    <br/>
                     <Link to={`/movies/${movie.id}/reviews`} className="reviews-link">Reviews</Link>
                   </div>
                 </div>

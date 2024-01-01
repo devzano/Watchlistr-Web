@@ -38,7 +38,7 @@ const TopRatedMedia = () => {
                       <p className="genres">Genres: {movie.genres ? movie.genres.map((genre) => genre.name).join(', ') : 'N/A'}</p>
                       <p className="overview">{movie.overview}</p>
                       <Link to={`/movies/${movie.id}`} className="view-media-link">View Media</Link>
-                      <br />
+                      <br/>
                       <Link to={`/movies/${movie.id}/reviews`} className="reviews-link">Reviews</Link>
                     </div>
                   </div>
@@ -76,9 +76,9 @@ const TopRatedMedia = () => {
                       <p className="genres">Genres: {tvShow.genres ? tvShow.genres.map((genre) => genre.name).join(', ') : 'N/A'}</p>
                       <p className="overview">{tvShow.overview}</p>
                       <Link className="view-media-link" to={`/tv-shows/${tvShow.id}`}>View Media</Link>
-                      <br />
-                      <Link to={`/tv-shows/${tvShow.id}/episodes`} className="episodes-link">View Episodes</Link>
-                      <br />
+                      <br/>
+                      <Link to={`/tv-shows/${tvShow.id}/episodes`} className="view-media-link">View Episodes</Link>
+                      <br/>
                       <Link className="reviews-link" to={`/tv-shows/${tvShow.id}/reviews`}>Reviews</Link>
                     </div>
                   </div>

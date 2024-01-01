@@ -2,8 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import {toast} from 'react-toastify';
-import './styles/Poster.css';
-import './styles/Titles.css';
+import './styles/Media.css';
 
 const replitBackendURL = process.env.REACT_APP_REPLIT_BACKEND_URL;
 
@@ -138,19 +137,19 @@ function Watchlist() {
   };
 
   return (
-    <div className="nav-container watchlist">
+    <div className="nav-container">
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <h2 style={{ textTransform: 'capitalize' }}>{username}&apos;s Watchlist</h2>
-        <button onClick={toggleMedia}>{showMedia ? (<i className="fas fa-tv"></i>) : (<i className="fas fa-film"></i>)}</button>
+        <h2 className="header" style={{ textTransform: 'capitalize' }}>{username}&apos;s Watchlist</h2>
+        <button className="toggle-button" onClick={toggleMedia}>{showMedia ? (<i className="fas fa-tv"></i>) : (<i className="fas fa-film"></i>)}</button>
       </div>
       {showMedia ? (
-        <div>
+        <div className="movies media-grid-container">
           {movies.length === 0 ? (
             <p>no movies in watchlist yet!</p>
           ) : (
             movies.map((movie, index) => (
-              <div key={`movie-${index}`} className="poster">
-                <span>
+              <div key={`movie-${index}`} className="media-card">
+                <div style={{color: 'slateblue'}} className="media-content">
                   <h3>{movie.title}</h3>
                   <button className="button-to-watchlist" onClick={() => removeMovieFromWatchlist(movie)}><i className="fas fa-trash"></i></button>
                   {movie.posterPath ? (
@@ -161,23 +160,23 @@ function Watchlist() {
                   <p>Release Date: {movie.releaseDate}</p>
                   <p>Runtime: {movie.runtime}mins</p>
                   <p>{movie.overview}</p>
-                  <Link to={`/movies/${movie.movieId}`}>View Media</Link>
+                  <Link className="view-media-link" to={`/movies/${movie.movieId}`}>View Media</Link>
                   <br/>
-                  <Link to={`/movies/${movie.movieId}/reviews`}>Reviews</Link>
-                </span>
+                  <Link className="reviews-link"to={`/movies/${movie.movieId}/reviews`}>Reviews</Link>
+                </div>
               </div>
             ))
           )}
         </div>
       ) : (
-        <div>
+        <div className="tvShows media-grid-container">
           {tvShows.length === 0 ? (
             <p>no tv shows in your watchlist yet!</p>
           ) : (
             tvShows.map((tvShow, index) => (
-              <div key={`tv-show-${index}`} className="poster">
-                <span>
-                  <h2>{tvShow.name}</h2>
+              <div key={`tv-show-${index}`} className="media-card">
+                <div style={{color: 'slateblue'}}className="media-content">
+                  <h3>{tvShow.name}</h3>
                   <button className="button-to-watchlist" onClick={() => removeTVShowFromWatchlist(tvShow)}><i className="fas fa-trash"></i></button>
                   {tvShow.posterPath ? (
                     <img src={`https://image.tmdb.org/t/p/original/${tvShow.posterPath}`} width='300px' key={tvShow.name} alt={tvShow.name} />
@@ -187,9 +186,9 @@ function Watchlist() {
                   <p>First & Last Air Dates: <br /> {tvShow.airDates}</p>
                   <p>Runtime: {tvShow.runtime}mins</p>
                   <p>{tvShow.overview}</p>
-                  <Link to={`/tv-shows/${tvShow.tvShowId}`}>View Trailers</Link>
-                  <Link to={`/tv-shows/${tvShow.tvShowId}/reviews`}>Reviews</Link>
-                </span>
+                  <Link className="view-media-link" to={`/tv-shows/${tvShow.tvShowId}`}>View Media</Link>
+                  <Link className="reviews-link" to={`/tv-shows/${tvShow.tvShowId}/reviews`}>Reviews</Link>
+                </div>
               </div>
             ))
           )}

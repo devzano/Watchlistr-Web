@@ -114,7 +114,7 @@ const Navbar = (props) => {
           <div className={`navbar-links ${showMenu ? 'show-menu' : ''}`}>
             <NavLink to={'/media-search'}>Search</NavLink>
             <NavLink to={'/popular-media'}>Popular</NavLink>
-            <NavLink to={'/upcoming-movies'}>Upcoming</NavLink>
+            <NavLink to={'/upcoming-movies'}>Upcoming Movies</NavLink>
             <NavLink to={'/airing-today'}>Airing Today</NavLink>
             <NavLink to={'/top-rated-media'}>Top Rated</NavLink>
             <NavLink to={'/watchlist'}>Watchlist</NavLink>

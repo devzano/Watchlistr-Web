@@ -167,9 +167,9 @@ const MediaSearch = () => {
               <p>Runtime: {movie.runtime}mins</p>
               <p>Genres: {movie.genres.map((genre) => genre.name).join(', ')}</p>
               <p>{movie.overview}</p>
-              <Link to={`/movies/${movie.id}`}>View Media</Link>
+              <Link className="view-media-link" to={`/movies/${movie.id}`}>View Media</Link>
               <br/>
-              <Link to={`/movies/${movie.id}/reviews`}>Reviews</Link>
+              <Link className="reviews-link" to={`/movies/${movie.id}/reviews`}>Reviews</Link>
             </span>
           </div>
         ))}
@@ -208,9 +208,11 @@ const MediaSearch = () => {
               <p>Runtime: {tvShow.episode_run_time[0]}mins</p>
               <p>Genres: {tvShow.genres.map((genre) => genre.name).join(', ')}</p>
               <p>{tvShow.overview}</p>
-              <Link to={`/tv-shows/${tvShow.id}`}>View Trailers</Link>
+              <Link className="view-media-link" to={`/tv-shows/${tvShow.id}`}>View Trailers</Link>
               <br/>
-              <Link to={`/tv-shows/${tvShow.id}/reviews`}>Reviews</Link>
+              <Link className="view-media-link" to={`/tv-shows/${tvShow.id}/episodes`}>View Episodes</Link>
+              <br/>
+              <Link className="reviews-link"to={`/tv-shows/${tvShow.id}/reviews`}>Reviews</Link>
             </span>
           </div>
         ))}

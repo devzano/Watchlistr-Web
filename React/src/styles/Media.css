@@ -1,0 +1,144 @@
+/* Container styles */
+.media-container {
+  padding: 20px;
+}
+
+.media-grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 40px;
+}
+
+/* Headers */
+.header {
+  font-size: 62px;
+  display: inline;
+}
+
+/* Loading indicator styles */
+.loading-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top: 4px solid #3498db;
+  width: 40px;
+  height: 40px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Media card styles */
+.media-card {
+  position: relative;
+  background-color: #333;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  max-width: 200px;
+}
+
+.media-content {
+  text-align: center;
+  color: #3498db;
+}
+
+/* Header styles */
+.media-header {
+  margin-bottom: 20px;
+  color: slateblue;
+}
+
+/* Toggle button styles */
+.toggle-button {
+  background-color: transparent;
+  border: none;
+  color: #3498db;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.toggle-button:hover {
+  opacity: 0.7;
+}
+
+/* Title styles */
+.media-card h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Add to Watchlist button styles */
+.add-to-watchlist-button {
+  position: absolute;
+  top: -5px;
+  right: 0px;
+  color: #c0392b;
+  border: none;
+  border-radius: 8px;
+  padding: 4px 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-to-watchlist-button:hover {
+  background-color: #333;
+}
+
+/* Image styles */
+.media-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+/* Text styles */
+.release-date,
+.runtime,
+.genres,
+.overview,
+.air-dates {
+  margin-top: 10px;
+  font-size: 14px;
+  color: slateblue;
+}
+
+/* Links styles */
+.view-media-link,
+.reviews-link {
+  display: inline;
+  text-decoration: none;
+  color: #3498db;
+  margin-top: 10px;
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.view-media-link:hover,
+.reviews-link:hover {
+  text-decoration: underline;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .media-grid-container {
+    margin-left: 50px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}

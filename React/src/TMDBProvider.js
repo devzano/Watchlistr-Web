@@ -47,8 +47,8 @@ const ShowsProvider = ({children}) => {
 
     // Fetch Upcoming Movies
     const upcomingMovies = [];
-    page = 1; // Reset page for upcoming movies
-    totalPages = 1; // Reset totalPages for upcoming movies
+    page = 1;
+    totalPages = 1;
 
     while (page <= totalPages && page <= MAX_PAGES) {
       const res = await axios.get(`https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=en-US&page=${page}&region=US`);
@@ -90,7 +90,7 @@ const fetchMedia = async (type, setMoviesFunction, setTvShowsFunction) => {
     ]);
     let movies = initialMoviesRes.data.results;
     let tvShows = initialTvShowsRes.data.results;
-    for (let i = 2; i <= MAX_PAGES; i++) { // Use MAX_PAGES here
+    for (let i = 2; i <= MAX_PAGES; i++) {
       const [moviesRes, tvShowsRes] = await Promise.all([
         axios.get(`https://api.themoviedb.org/3/${movieEndpoint}?api_key=${apiKey}&language=en-US&region=US&page=${i}`),
         axios.get(`https://api.themoviedb.org/3/${tvEndpoint}?api_key=${apiKey}&language=en-US&with_original_language=en&with_origin_country=US&page=${i}`),

@@ -68,7 +68,7 @@ To get started with the app, follow these steps:
 1. **Deploy to Vercel:**
 - Create an account on [Vercel](https://vercel.com/signup).
 - Deploy your project.
-- Configure environmental variables on Vercel, including `REACT_APP_TMDB_API_KEY` `REACT_APP_REPLIT_BACKEND_URL`.
+- Configure environmental variables on Vercel, including `REACT_APP_TMDB_API_KEY` `REACT_APP_RENDER_BACKEND_URL`.
 - If importing from GitHub, ensure that the deployment root directory starts from `React`.
 
 ### Features

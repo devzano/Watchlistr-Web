@@ -15,7 +15,7 @@ import bgImage4 from './styles/Screenshots/Login-Background3.jpg';
 import bgImage5 from './styles/Screenshots/Login-TVBackground.jpg';
 import bgImage6 from './styles/Screenshots/Login-TVBackground1.jpg';
 
-const renderBackendURL = process.env.REACT_APP_REPLIT_BACKEND_URL;
+const renderBackendURL = process.env.REACT_APP_RENDER_BACKEND_URL;
 
 const AuthForm = ({onLogin}) => {
   const [isSignup, setIsSignup] = useState(false);

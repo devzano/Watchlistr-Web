@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './styles/Navbar.css';
 import logo from './styles/logo.svg';
 
-const renderBackendURL = process.env.REACT_APP_REPLIT_BACKEND_URL;
+const renderBackendURL = process.env.REACT_APP_RENDER_BACKEND_URL;
 
 const Navbar = (props) => {
   // eslint-disable-next-line

@@ -4,7 +4,7 @@ import axios from 'axios';
 import {toast} from 'react-toastify';
 import './styles/Media.css';
 
-const renderBackendURL = process.env.REACT_APP_REPLIT_BACKEND_URL;
+const renderBackendURL = process.env.REACT_APP_RENDER_BACKEND_URL;
 
 function Watchlist() {
   const [movies, setMovies] = useState([]);

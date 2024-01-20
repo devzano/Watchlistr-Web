@@ -15,7 +15,7 @@ import bgImage4 from './styles/Screenshots/Login-Background3.jpg';
 import bgImage5 from './styles/Screenshots/Login-TVBackground.jpg';
 import bgImage6 from './styles/Screenshots/Login-TVBackground1.jpg';
 
-const replitBackendURL = process.env.REACT_APP_REPLIT_BACKEND_URL;
+const renderBackendURL = process.env.REACT_APP_REPLIT_BACKEND_URL;
 
 const AuthForm = ({onLogin}) => {
   const [isSignup, setIsSignup] = useState(false);
@@ -54,7 +54,7 @@ const AuthForm = ({onLogin}) => {
           const formData = new URLSearchParams();
             formData.append('username', username);
             formData.append('password', password);
-            const res = await axios.post(`https://${replitBackendURL}/signup`, formData.toString(), {
+            const res = await axios.post(`https://${renderBackendURL}/signup`, formData.toString(), {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
@@ -67,7 +67,7 @@ const AuthForm = ({onLogin}) => {
               const formData = new URLSearchParams();
               formData.append('username', username);
               formData.append('password', password);
-              const res = await axios.post(`https://${replitBackendURL}/login`, formData.toString(), {
+              const res = await axios.post(`https://${renderBackendURL}/login`, formData.toString(), {
                   headers: {
                       'Content-Type': 'application/x-www-form-urlencoded',
                   },
@@ -95,7 +95,7 @@ const AuthForm = ({onLogin}) => {
         const formData = new URLSearchParams();
         formData.append('username', username);
         formData.append('password', password);
-        const res = await axios.post(`https://${replitBackendURL}/login`, formData.toString(), {
+        const res = await axios.post(`https://${renderBackendURL}/login`, formData.toString(), {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },

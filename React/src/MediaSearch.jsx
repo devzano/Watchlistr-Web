@@ -7,7 +7,7 @@ import './styles/LoadingIndicator.css'
 import './styles/MediaSearch.css';
 
 const apiKey = process.env.REACT_APP_TMDB_API_KEY;
-const replitBackendURL = process.env.REACT_APP_REPLIT_BACKEND_URL;
+const renderBackendURL = process.env.REACT_APP_REPLIT_BACKEND_URL;
 
 const MediaSearch = () => {
   const [query, setQuery] = useState('');
@@ -84,7 +84,7 @@ const MediaSearch = () => {
         },
       };
 
-      const response = await axios.post(`https://${replitBackendURL}/user-watchlist-movie`, formData.toString(), config);
+      const response = await axios.post(`https://${renderBackendURL}/user-watchlist-movie`, formData.toString(), config);
       if (response === 'success') {
 
         console.log(`${movie.title} added to watchlist!`);
@@ -126,7 +126,7 @@ const MediaSearch = () => {
         },
       };
 
-      const response = await axios.post(`https://${replitBackendURL}/user-watchlist-tv`, formData.toString(), config);
+      const response = await axios.post(`https://${renderBackendURL}/user-watchlist-tv`, formData.toString(), config);
       if (response === 'success') {
         console.log(`${tvShow.name} added to Watchlist!`);
       }

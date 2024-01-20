@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './styles/Navbar.css';
 import logo from './styles/logo.svg';
 
-const replitBackendURL = process.env.REACT_APP_REPLIT_BACKEND_URL;
+const renderBackendURL = process.env.REACT_APP_REPLIT_BACKEND_URL;
 
 const Navbar = (props) => {
   // eslint-disable-next-line
@@ -45,7 +45,7 @@ const Navbar = (props) => {
 
   const deleteAccount = async () => {
     try {
-        const res = await axios.delete(`https://${replitBackendURL}/users/${username}`, {
+        const res = await axios.delete(`https://${renderBackendURL}/users/${username}`, {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },

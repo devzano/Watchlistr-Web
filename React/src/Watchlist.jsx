@@ -4,7 +4,7 @@ import axios from 'axios';
 import {toast} from 'react-toastify';
 import './styles/Media.css';
 
-const replitBackendURL = process.env.REACT_APP_REPLIT_BACKEND_URL;
+const renderBackendURL = process.env.REACT_APP_REPLIT_BACKEND_URL;
 
 function Watchlist() {
   const [movies, setMovies] = useState([]);
@@ -21,7 +21,7 @@ function Watchlist() {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
       };
-      const res = await axios.post(`https://${replitBackendURL}/watchlist/movies`, formData.toString(), config);
+      const res = await axios.post(`https://${renderBackendURL}/watchlist/movies`, formData.toString(), config);
       setMovies(res.data);
     }
     catch (error) {
@@ -38,7 +38,7 @@ function Watchlist() {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
       };
-      const res = await axios.post(`https://${replitBackendURL}/watchlist/tv`, formData.toString(), config);
+      const res = await axios.post(`https://${renderBackendURL}/watchlist/tv`, formData.toString(), config);
       setTVShows(res.data);
     }
     catch (error) {
@@ -101,7 +101,7 @@ function Watchlist() {
         },
       };
 
-      const res = await axios.post(`https://${replitBackendURL}/deletemovies`, formData.toString(), config);
+      const res = await axios.post(`https://${renderBackendURL}/deletemovies`, formData.toString(), config);
       if (res === 'delete') {
         console.log('Movie Removed From Watchlist', movieInternalId);
       }
@@ -122,7 +122,7 @@ function Watchlist() {
         },
       };
 
-      const res = await axios.post(`https://${replitBackendURL}/deleteshow`, formData.toString(), config);
+      const res = await axios.post(`https://${renderBackendURL}/deleteshow`, formData.toString(), config);
       if (res === 'delete') {
         console.log('TV Show Removed From Watchlist', tvShowInternalId);
       }

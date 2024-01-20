@@ -10,14 +10,15 @@ This project is the inception of my journey into project development. Should you
 
 ### Built Using
 
-* Vercel
 * React
 * Node.js
-* Replit
 * Express.js
 * Axios
+* Vercel
+* Render
 * FreeDBTech
 * PHPMyAdmin
+* UptimeRobot
 * The Movie Database (TMDB) API
 * ToastUI
 
@@ -29,39 +30,42 @@ To get started with the app, follow these steps:
 - ```git clone https://github.com/devzano/Watchlistr-Web.git```
 
 2. **Install Dependencies:**
-- Run `npm install` in the root directory of `React` & `Express:MySQL`.
+- Run `npm install` in the root directory of `React` & `ExpressMySQL`.
 
 3. **Set Up the Database:**
 - Signup for a free database with [FreeDBTech](https://freedb.tech/register.html).
-- Replace ***`user`*** & ***`database`*** with your __`user`__ & __`database`__ inside `Express:MySQL/index.js`.
+- Replace ***`user`*** & ***`database`*** with your __`user`__ & __`database`__ inside `ExpressMySQL/index.js`.
 - Access [PHPMyAdmin](https://phpmyadmin.freedb.tech/index.php?route=/) via the FreeDB Free Database Panel.
 - Input database credentials to login.
 - Add the SQL queries from `data.sql` to set up the database.
 
-4. **Create a Replit Template:**
-- Signup for an account on [Replit](https://replit.com/signup).
-- Create a template using Node.js.
-- Input the code from `index.js` into the template.
-- Create a secret called `DATABASE_PASSWORD` with the values of your database password.
+4. **Create a Render Project:**
+- Signup for an account on [Render](https://render.com/register).
+- Create a web service.
+- Build and depoly from repo.
+- Connect repo.
+- Change root directory to `ExpressMySQL`.
+- Create a env variable in settings called `DATABASE_PASSWORD`, with the values of your database password.
+- Create
 
-5. **Obtain a TMDB API Key:**
+1. **Obtain a TMDB API Key:**
 - Signup for an account on [TMDB](https://www.themoviedb.org/account/signup).
 - Obtain an API key.
 
-6. **Create Environment Variables:**
-- In the root directory of `React` & `Express:MySQL`, create a file called `.env`.
+1. **Create Environment Variables:**
+- In the root directory of `React` & `ExpressMySQL`, create a file called `.env`.
 - Add the following lines to ***React***:
   ```
   REACT_APP_TMDB_API_KEY=YOUR-API-KEY
-  REACT_APP_REPLIT_BACKEND_URL=YOUR-BACKEND-URL
+  REACT_APP_RENDER_BACKEND_URL=YOUR-BACKEND-URL
   ```
-- Add the following lines to ***Express:MySQL***:
+- Add the following lines to ***ExpressMySQL***:
   ```
   DATABASE_PASSWORD=YOUR-DB-PASS
   ```
   <sup><sub>Note: If the password has special characters, put it in quotes.</sub></sup>
 
-7. **Deploy to Vercel:**
+1. **Deploy to Vercel:**
 - Create an account on [Vercel](https://vercel.com/signup).
 - Deploy your project.
 - Configure environmental variables on Vercel, including `REACT_APP_TMDB_API_KEY` `REACT_APP_REPLIT_BACKEND_URL`.
@@ -88,5 +92,5 @@ Copyright © 2023 devzano. All rights reserved.
 * The TMDB API for providing movies and tv shows data.
 * Running ```create-react-app``` for the initial app setup.
 * Deploying on Vercel.
-* Using Replit as backend server.
+* Using Render as backend server.
 * Having a small free database on FreeDBTech.

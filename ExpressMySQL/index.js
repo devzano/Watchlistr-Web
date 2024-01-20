@@ -53,6 +53,12 @@ const executeQuery = async (query, params) => {
   }
 };
 
+app.get('/',(req,res) =>{
+
+  res.send('server is running ')
+
+})
+
 app.delete('/users/:username', async (req, res) => {
   const { username } = req.params;
   console.log(username);
